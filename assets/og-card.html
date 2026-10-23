@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>Share card source (og-image.png)</title>
+<!--
+  Source for /og-image.png (1200×630). Not linked from the site. Same look as the share card
+  the app draws (public/app.js drawShareCard; colors from design/tokens.json).
+  Regenerate after changing SITE_URL (see site/README.md):
+    headless Chrome, window 1200×630, screenshot this file, save as site/og-image.png
+-->
+<style>
+  @font-face {
+    font-family: "Schibsted Grotesk";
+    src: url("../fonts/schibsted-grotesk-latin.woff2") format("woff2");
+    font-weight: 400 900;
+  }
+  :root {
+    --carbon: #121628;
+    --rule: #323a5c;
+    --edge: #6b74a3;
+    --paper: #ece7da;
+    --paper-2: #a9aecb;
+    --transfer: #9ea6ff;
+    --copy: #464b78;
+  }
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: var(--carbon); }
+  body {
+    font-family: "Schibsted Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--paper);
+  }
+  .card {
+    box-sizing: border-box; width: 1200px; height: 630px; padding: 68px 72px 58px;
+    border: 4px solid var(--edge);
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .brand { display: flex; align-items: center; gap: 22px; font-size: 32px; font-weight: 650; color: var(--paper-2); }
+  .brand .slips { position: relative; width: 40px; height: 46px; flex: none; }
+  .brand .slips::before, .brand .slips::after { content: ""; position: absolute; width: 30px; height: 36px; border-radius: 3px; }
+  .brand .slips::before { left: 9px; top: 9px; background: var(--transfer); }
+  .brand .slips::after { left: 0; top: 0; background: var(--paper); }
+  h1 { margin: 0; font-size: 52px; line-height: 1.15; font-weight: 500; letter-spacing: -0.02em; }
+  h1 strong { display: block; font-size: 124px; line-height: 1.02; font-weight: 800; letter-spacing: -0.03em; text-shadow: 7px 7px 0 var(--copy); }
+  .line { margin: 18px 0 0; font-size: 30px; color: var(--paper-2); }
+  .foot {
+    margin: 0; font-size: 30px; font-weight: 650; color: var(--transfer); padding-top: 22px;
+    background: repeating-linear-gradient(90deg, var(--rule) 0 12px, transparent 12px 20px) top left / 100% 2px no-repeat;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="brand"><span class="slips" aria-hidden="true"></span>Twinslip</div>
+    <div>
+      <h1>My agents cost me <strong>$278.11</strong> last month.</h1>
+      <p class="line">across 2 agents · all of it checked against my bank</p>
+    </div>
+    <p class="foot">What did your agents cost you?</p>
+  </div>
+  <script>
+    // A long address stays on one line: the footer steps down in size until it fits.
+    const foot = document.querySelector('.foot');
+    foot.style.whiteSpace = 'nowrap';
+    for (let size = 30; foot.scrollWidth > foot.clientWidth && size > 18; size--) foot.style.fontSize = size + 'px';
+  </script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+{
+  "$comment": "A plain description of Twinslip's MCP server. It is a local stdio server that runs on the user's computer, so there is no remote endpoint and no .well-known server card (those describe HTTP servers). Details: https://graychar2425-blip.github.io/twinslip-site/agents.md",
+  "name": "twinslip",
+  "title": "Twinslip",
+  "description": "Lets an AI agent report the purchases it makes to the user's local expense ledger, prove its connection without spending anything, read its own spending and budget, and finish setup for the user. Add and read only: it can't confirm, delete or hide anything, and receipts it finds are kept as evidence, never as verification.",
+  "homepage": "https://graychar2425-blip.github.io/twinslip-site",
+  "documentation": "https://graychar2425-blip.github.io/twinslip-site/agents.md",
+  "transport": "stdio",
+  "install": {
+    "command": "node bin/twinslip.js setup --yes --json",
+    "note": "Run from the Twinslip folder. Never asks anything; each agent app gets its own agent, named after it. Then restart the app and call get_setup. Verified end to end with Claude Code; Claude Desktop, Cursor and Windsurf are configured by setup but not verified end to end. Other agents can use the CLI or the local webhook (untested).",
+    "runtime": "node >=22.13",
+    "supportedHosts": [
+      "Claude Desktop",
+      "Claude Code",
+      "Cursor",
+      "Windsurf"
+    ]
+  },
+  "launch": {
+    "command": "node",
+    "args": [
+      "<path to Twinslip>/bin/twinslip.js",
+      "mcp",
+      "--agent-key",
+      "<claude-desktop | claude-code | cursor | windsurf>"
+    ]
+  },
+  "protocolVersions": [
+    "2025-06-18",
+    "2025-03-26",
+    "2024-11-05"
+  ],
+  "capabilities": {
+    "tools": {
+      "listChanged": false
+    },
+    "prompts": {
+      "listChanged": false
+    }
+  },
+  "tools": [
+    {
+      "name": "record_purchase",
+      "title": "Record a purchase I made",
+      "readOnly": false,
+      "idempotent": true
+    },
+    {
+      "name": "record_receipt",
+      "title": "Record a receipt found in email",
+      "readOnly": false,
+      "idempotent": true
+    },
+    {
+      "name": "record_bank_alert",
+      "title": "Record a purchase alert from the user's bank",
+      "readOnly": false,
+      "idempotent": true
+    },
+    {
+      "name": "finish_sweep",
+      "title": "Say an email sweep is finished",
+      "readOnly": false,
+      "idempotent": false
+    },
+    {
+      "name": "get_spend",
+      "title": "How much have the agents spent",
+      "readOnly": true,
+      "idempotent": true
+    },
+    {
+      "name": "get_budget",
+      "title": "Check my monthly budget",
+      "readOnly": true,
+      "idempotent": true
+    },
+    {
+      "name": "check_mandate",
+      "title": "Check what I may buy",
+      "readOnly": true,
+      "idempotent": true
+    },
+    {
+      "name": "record_usage",
+      "title": "Record pay-per-use payments",
+      "readOnly": false,
+      "idempotent": false
+    },
+    {
+      "name": "get_job_cost",
+      "title": "What did this job cost",
+      "readOnly": true,
+      "idempotent": true
+    },
+    {
+      "name": "get_setup",
+      "title": "What is left to set up",
+      "readOnly": true,
+      "idempotent": true
+    },
+    {
+      "name": "record_expected_refund",
+      "title": "Record a refund you expect",
+      "readOnly": false,
+      "idempotent": true
+    },
+    {
+      "name": "test_capture",
+      "title": "Prove the connection without spending anything",
+      "readOnly": false,
+      "idempotent": true
+    }
+  ],
+  "prompts": [
+    {
+      "name": "setup",
+      "title": "Set up Twinslip"
+    },
+    {
+      "name": "bank_alert_sweep",
+      "title": "Sweep my email for bank purchase alerts"
+    },
+    {
+      "name": "receipt_sweep",
+      "title": "Sweep my email for agent receipts"
+    }
+  ],
+  "authentication": {
+    "required": false,
+    "note": "Local only. The agent's identity comes from the config line setup wrote (--agent-key for the app, or --agent with a name), never from the model."
+  }
+}

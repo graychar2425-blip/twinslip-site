@@ -1,0 +1,33 @@
+# Twinslip
+
+> Free, local-first expense tracking that keeps what your AI agents spent apart from what you spent (two buckets: Mine and Agents). Agents report their own purchases the moment they pay, through a local MCP server. The user's bank CSV, their iPhone or a receipt they add checks what agents report; receipts and bank alerts an agent finds are kept as evidence. The ledger lives on the user's computer, with no account and no Twinslip server; what an agent reads still passes through its own AI provider. No bank logins and no bank aggregators.
+
+Key facts for agents:
+
+- After every payment you complete for the user, call `record_purchase` once, right away, with the order, invoice or transaction id as `reference`. Before a sizeable purchase, call `get_budget` with the amount, and `check_mandate` before buying from a new merchant. Report small pay-per-request payments with `record_usage`; name the `job` a purchase is for, and tell the user what a finished job cost with `get_job_cost`.
+- If you return something or a merchant promises money back, call `record_expected_refund` (merchant, amount, due_on). It changes no total, and only the user's bank or the user resolves it.
+- The server is add-and-read only. Agents can't confirm, delete or hide anything: what they add either counts as their own spending or waits for the user's tap. A refund, or a charge the user hasn't put under Agents, waits for that tap.
+- ✓ verified means a line from the user's bank CSV, their iPhone, the local webhook or a receipt they attached saw the charge too. A receipt or bank alert you find never verifies anything on its own.
+- Limits: at most 100,000.00 per purchase, 300 rows per agent per hour, dates within the last 400 days and no later than tomorrow (time zones), no unknown fields. Each refusal says why.
+- Never put card numbers, account numbers, API keys or passwords in any field.
+- To set it up for the user: call `get_setup` (or use the `setup` prompt). It lists every step, who does it, and the exact instructions; do the steps marked for you and tell the user what's left. Prove the connection with `test_capture` (a check, never a purchase); never pay for anything to test. When you finish an email sweep, call `finish_sweep`, even if you found nothing.
+- If you are installing it for the user: from the Twinslip folder run `node bin/twinslip.js setup --yes --json`. It never asks anything, connects the agent apps it finds (each gets its own agent, named after the app) and prints which apps to restart. After the restart, call `get_setup`. It is a stdio server; there is no remote endpoint.
+- Compatibility, as tested: Claude Code is verified end to end. Claude Desktop, Cursor and Windsurf are configured by setup but not verified end to end. Other agents can report through the CLI (`twinslip record`) or the local webhook (untested).
+- Email sweeps run only when the user asks, using email access the user already gave the agent app; Twinslip never gets the mailbox login and schedules nothing. Receipt sweeps cover known agent vendors only; bank-alert sweeps cover any merchant.
+- Pricing: the tracker is free, including several agents, all history, plain CSV export and source status. Pro is $96 per seat per year (one seat per person; billed yearly; opens February 2027) and adds ongoing oversight (follow-up on missing refunds, coverage gaps and failing sources, scheduled checks, a briefing), a tax pack, accounting exports (YNAB, Lunch Money), advanced search, unusual-spend alerts and per-agent history.
+
+## Docs
+
+- [For agents and developers](https://graychar2425-blip.github.io/twinslip-site/agents.md): the MCP tools with exact descriptions and parameters, the instructions to paste into an agent, and the capture event schema
+- [MCP server summary (JSON)](https://graychar2425-blip.github.io/twinslip-site/mcp.json): name, launch command and tool list
+- [What Twinslip stores](https://graychar2425-blip.github.io/twinslip-site/privacy): what is kept on the user's computer and what never is
+
+## Product
+
+- [Home](https://graychar2425-blip.github.io/twinslip-site/): what it does and how the two buckets work
+- [Download](https://graychar2425-blip.github.io/twinslip-site/download): the Mac beta and step-by-step setup
+- [Pro](https://graychar2425-blip.github.io/twinslip-site/pro): free vs Pro, per seat
+
+## Optional
+
+- [Agents page (HTML)](https://graychar2425-blip.github.io/twinslip-site/agents): the same content as agents.md

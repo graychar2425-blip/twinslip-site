@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Download Twinslip</title>
+<meta name="description" content="Download the free Twinslip beta for Mac and set it up in about ten minutes, no coding needed.">
+<link rel="canonical" href="https://graychar2425-blip.github.io/twinslip-site/download">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#121628">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Twinslip">
+<meta property="og:title" content="Download Twinslip">
+<meta property="og:description" content="Free for Mac. Set up in about ten minutes, no coding needed.">
+<meta property="og:url" content="https://graychar2425-blip.github.io/twinslip-site/download">
+<meta property="og:image" content="https://graychar2425-blip.github.io/twinslip-site/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="My agents cost me $278.11 last month, across 2 agents, all of it checked against my bank.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/schibsted-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+<script src="main.js" defer></script>
+</head>
+<body class="page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="favicon.svg" alt="" width="30" height="30">Twinslip</a>
+    <nav class="nav" aria-label="Main">
+      <a href="index.html#how">How it works</a>
+      <a href="pro.html">Pro</a>
+      <a href="agents.html">For agents</a>
+      <a class="nav-wide" href="privacy.html">Privacy</a>
+      <a class="btn" href="download.html" aria-current="page">Download</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-head">
+    <div class="wrap">
+      <h1>Download Twinslip</h1>
+      <p class="lead">Free, for Mac. Setup takes about ten minutes and you don't need to know how to code. Every click is written out below.</p>
+    </div>
+  </div>
+
+  <section aria-label="Downloads">
+    <div class="wrap">
+      <div class="dl-grid">
+        <div class="dl">
+          <h2>Mac</h2>
+          <p class="muted">The beta: a folder with the app and a file you double-click to start it.</p>
+          <a class="btn" href="downloads/Twinslip-beta-0.1.0.zip" download>Download for Mac</a>
+          <p class="meta">Twinslip-beta-0.1.0.zip, a small zip file. Needs macOS and a free program called Node, which the app helps you install.</p>
+        </div>
+        <div class="dl">
+          <h2>iPhone</h2>
+          <p class="muted">Sends Apple Pay (Wallet) taps and the bank texts you set up from your phone to Twinslip on your Mac, through your iCloud Drive. Cards outside Wallet and online purchases aren't captured.</p>
+          <span class="store-badge" role="img" aria-label="iPhone app coming soon to the App Store">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg>
+            <span>Coming soon<small>to the App Store</small></span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="rule-top" aria-labelledby="setup-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="setup-h">Set it up on your Mac</h2>
+        <p>Have your agent app installed first. Claude Code is checked end to end; Claude Desktop, Cursor and Windsurf are set up the same way but not yet checked end to end.</p>
+      </div>
+      <ol class="howto">
+        <li>
+          <h3>Open the download</h3>
+          <p>Double-click <span class="path">Twinslip-beta-0.1.0.zip</span> in your Downloads folder. You get a folder called <span class="path">Twinslip</span>.</p>
+        </li>
+        <li>
+          <h3>Move the folder to your Home folder</h3>
+          <p>In Finder, choose <span class="path">Go → Home</span> from the menu bar, then drag the <span class="path">Twinslip</span> folder into that window. Leave it there afterwards; if you move it later, you'll need to do the setup again.</p>
+        </li>
+        <li>
+          <h3>Double-click "Start Twinslip"</h3>
+          <p>It's inside the folder. The first time, your Mac stops it with a message that it can't check the app, because this beta isn't signed by Apple yet. That's expected. Click <span class="path">Done</span>, not "Move to Trash". Then:</p>
+          <ul>
+            <li>Open <span class="path">System Settings → Privacy &amp; Security</span>.</li>
+            <li>Scroll down to the message about "Start Twinslip" and click <span class="path">Open Anyway</span>.</li>
+            <li>Enter your Mac password if it asks, then click <span class="path">Open</span>.</li>
+          </ul>
+          <div class="note"><p>On macOS 15 and later, right-clicking the file and choosing Open no longer gets past this message. Use Open Anyway in System Settings. You only do this once; after that a normal double-click works.</p></div>
+        </li>
+        <li>
+          <h3>Install Node if it asks</h3>
+          <p>Twinslip runs on Node, a free program many apps use. If you don't have it, a page from nodejs.org opens for you. Download the version marked <span class="path">LTS</span>, install it like any other app, then double-click "Start Twinslip" again.</p>
+        </li>
+        <li>
+          <h3>Hand it to your agent</h3>
+          <p>Twinslip connects itself to the agent apps it finds on your Mac (Claude Desktop, Claude Code, Cursor, Windsurf) and changes nothing else in them. Quit your agent app and open it again so it picks up the connection, then say: <span class="path">"Set up Twinslip."</span></p>
+          <p>Your agent does the rest and tells you if anything is left for you to do. If your agent app can already read your email, it can sweep it for receipts from AI and developer-tool vendors and for bank alerts, right then; Twinslip never gets your email login, and nothing runs on a schedule.</p>
+        </li>
+        <li>
+          <h3>That's it</h3>
+          <p>Your ledger opens in your web browser. The address starts with 127.0.0.1, which means your own computer, not a website. A checklist there ticks itself off as things start working, and from now on each purchase your agent reports shows up within a second.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="rule-top" aria-labelledby="after-h">
+    <div class="wrap narrow prose">
+      <h2 id="after-h">After that</h2>
+      <p>Double-click "Start Twinslip" whenever you want to look at your ledger. You can close the window when you're done; your agent keeps recording purchases either way.</p>
+      <h3>Optional: double-check your agent</h3>
+      <p>A purchase is marked verified when something your agent didn't supply saw the charge too: your bank's statement file, your iPhone or a receipt you attach.</p>
+      <ul>
+        <li>Your bank: download the statement file (CSV) your bank's website offers and drop it on the ledger page. Twinslip never logs into your bank.</li>
+        <li>A receipt you have: click Attach receipt on the purchase and pick the file.</li>
+        <li>Receipts in your email: ask your agent, "Sweep my email for agent receipts." This works only if your agent can already read your email, and it looks for AI and developer-tool vendors, not everyday shopping. No email in your agent app? Use your bank's statement file instead. Receipts your agent finds are kept as evidence and catch purchases it forgot, but they don't mark anything verified.</li>
+      </ul>
+      <h3>Updating</h3>
+      <p>Download the new zip and replace the old Twinslip folder with it. Your data is kept somewhere else, so nothing is lost. Then do steps 3 to 5 again.</p>
+      <h3>Removing it</h3>
+      <ul>
+        <li>Delete the Twinslip folder.</li>
+        <li>Delete your data: in Finder choose Go → Go to Folder, type <code>~/.twinslip</code>, and move that folder to the Trash.</li>
+        <li>Remove "twinslip" from your agent app's connector settings.</li>
+      </ul>
+      <h3>Something not working?</h3>
+      <p>Take a screenshot of the window and <a href="https://github.com/graychar2425-blip/agent-ledger-site/issues">tell us on GitHub</a>. In the ledger, Menu → Settings → "Show beta report" gives counts only, with no merchants, amounts or names, if they ask for it.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div>
+      <a class="brand" href="./"><img src="favicon.svg" alt="" width="30" height="30">Twinslip</a>
+      <p>Free expense tracking that keeps what your agents spent apart from what you spent. In beta.</p>
+      <p>This site has no trackers, no analytics and no cookies.</p>
+      <p>Questions or something broken? <a href="https://github.com/graychar2425-blip/agent-ledger-site/issues">Tell us on GitHub</a>.</p>
+    </div>
+    <nav aria-label="Product">
+      <a href="download.html">Download</a>
+      <a href="pro.html">Pro</a>
+      <a class="nav-wide" href="privacy.html">Privacy</a>
+    </nav>
+    <nav aria-label="For agents and developers">
+      <a href="agents.html">For agents and developers</a>
+      <a href="llms.txt">llms.txt</a>
+      <a href="agents.md">agents.md</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

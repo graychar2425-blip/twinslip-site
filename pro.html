@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; script-src 'self' https://app.lemonsqueezy.com https://assets.lemonsqueezy.com; style-src 'self' 'unsafe-inline'; frame-src https://*.lemonsqueezy.com; connect-src 'self' https://*.lemonsqueezy.com; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Twinslip Pro</title>
+<meta name="description" content="Twinslip is free to use. Pro adds follow-up on what needs you (missing refunds, coverage gaps, failing sources), a tax pack, accounting exports, advanced search, unusual-spend alerts and per-agent history. Per seat, billed yearly. Your ledger lives on your computer. We never see it.">
+<link rel="canonical" href="https://graychar2425-blip.github.io/twinslip-site/pro">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#121628">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Twinslip">
+<meta property="og:title" content="Twinslip Pro">
+<meta property="og:description" content="Free to use, paid to rely on. Oversight with follow-up, tax pack, accounting exports, alerts and per-agent history. Your ledger lives on your computer. We never see it.">
+<meta property="og:url" content="https://graychar2425-blip.github.io/twinslip-site/pro">
+<meta property="og:image" content="https://graychar2425-blip.github.io/twinslip-site/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="My agents cost me $278.11 last month, across 2 agents, all of it checked against my bank.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/schibsted-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+<script src="config.js" defer></script>
+<script src="main.js" defer></script>
+<script src="pro.js" defer></script>
+</head>
+<body class="page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="favicon.svg" alt="" width="30" height="30">Twinslip</a>
+    <nav class="nav" aria-label="Main">
+      <a href="index.html#how">How it works</a>
+      <a href="pro.html" aria-current="page">Pro</a>
+      <a href="agents.html">For agents</a>
+      <a class="nav-wide" href="privacy.html">Privacy</a>
+      <a class="btn" href="download.html">Download</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-head">
+    <div class="wrap">
+      <h1>Free to use. Pro if you rely on it.</h1>
+      <p class="lead">The tracker is free and stays free. Pro keeps watch over your agents' spending and follows up on what needs you, and adds what you need once an accountant, a client or a tax form depends on your numbers.</p>
+    </div>
+  </div>
+
+  <section aria-labelledby="buy-h">
+    <div class="wrap">
+      <div class="buy">
+        <div>
+          <h2 id="buy-h" class="sr">Pro</h2>
+          <p class="kicker">Pro opens</p>
+          <p class="price-big">February 2027</p>
+          <p class="per">$96 a seat per year ($8 a month, billed yearly). Anyone who buys by 15 April 2027 pays $72 a year for as long as they stay subscribed. Everything in Free works today, with no account and no card.</p>
+        </div>
+        <div class="buy-closed">
+          <a class="btn" href="download.html">Get the free app</a>
+          <p class="small muted below">A seat is one person, not an agent or a device, on up to two of their computers. With two seats or more you also get the audit trail.</p>
+        </div>
+        <template id="buy-live">
+        <div>
+          <h2 id="buy-h" class="sr">Buy Pro</h2>
+          <p class="testmode" id="testmode" hidden>Test checkout: no real money moves</p>
+          <p class="price-big"><span data-price>$96</span></p>
+          <p class="per">per seat, per year</p>
+          <p class="muted small below">A seat is one person, not an agent or a device, on up to two of their computers. With two seats or more you also get the audit trail.</p>
+        </div>
+        <div>
+          <div class="seats">
+            <label for="seats">Seats</label>
+            <div class="stepper">
+              <button type="button" id="seats-minus" aria-label="One seat fewer">&minus;</button>
+              <input id="seats" type="number" inputmode="numeric" min="1" max="25" step="1" value="1">
+              <button type="button" id="seats-plus" aria-label="One seat more">+</button>
+            </div>
+          </div>
+          <p class="total" id="total" aria-live="polite">1 seat × $96 a year</p>
+          <p class="small muted" id="audit-note" hidden>Includes the audit trail.</p>
+          <button type="button" class="btn" id="buy">Buy Pro</button>
+          <div class="checkout-msg" id="checkout-msg" role="status" tabindex="-1" hidden></div>
+          <p class="small muted below">Checkout is handled by Lemon Squeezy, which takes the payment and any sales tax. We never see your card. Your Pro key arrives by email.</p>
+        </div>
+        </template>
+      </div>
+    </div>
+  </section>
+
+  <section class="rule-top" aria-labelledby="why-h">
+    <div class="wrap">
+      <div class="section-head"><h2 id="why-h">Why it's a subscription</h2></div>
+      <div class="promise">
+        <p>Your ledger lives on your computer. We never see it. You pay us to keep the watch steady and the tools sharp: checks that flag what needs you, tax forms current every year, and parsers maintained as banks and platforms change underneath you.</p>
+        <p>Sync between your computers, shared views, renewal tracking and a monthly close are still on the way. They aren't part of Pro yet, and we'll say so here when they are.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="rule-top" aria-labelledby="cmp-h">
+    <div class="wrap">
+      <div class="section-head"><h2 id="cmp-h">What you get</h2></div>
+      <div class="compare-wrap">
+        <table class="compare">
+          <caption class="sr">Free and Pro features compared</caption>
+          <thead><tr><th scope="col">Feature</th><th scope="col">Free</th><th scope="col">Pro</th></tr></thead>
+          <tbody>
+            <tr class="group"><th scope="rowgroup" colspan="3">Tracking (free for good)</th></tr>
+            <tr><th scope="row">Purchases from your agents, receipts and your bank's statement file</th><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td></tr>
+            <tr><th scope="row">As many agents as you like</th><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td></tr>
+            <tr><th scope="row">Mine and Agents kept apart, with the one-tap inbox</th><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td></tr>
+            <tr><th scope="row">Monthly budgets per agent</th><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td></tr>
+            <tr><th scope="row">Month view and basic reports</th><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td></tr>
+            <tr><th scope="row">Warnings when a source is out of date, failing or never checked</th><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td></tr>
+            <tr><th scope="row">All your history, and plain spreadsheet export (CSV)</th><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td></tr>
+            <tr><th scope="row">The monthly share card</th><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td></tr>
+            <tr><th scope="row">iPhone app</th><td><span class="soon">Soon</span></td><td><span class="soon">Soon</span></td></tr>
+            <tr class="group"><th scope="rowgroup" colspan="3">Pro</th></tr>
+            <tr><th scope="row">Follow-up on missing refunds, gaps in coverage and sources that stopped checking</th><td><span class="no" aria-hidden="true">–</span><span class="sr">Not included</span></td><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td></tr>
+            <tr><th scope="row">Scheduled checks with notifications, and a short briefing of what was checked and what needs you</th><td><span class="no" aria-hidden="true">–</span><span class="sr">Not included</span></td><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td></tr>
+            <tr><th scope="row">Tax pack: a PDF summary, a spreadsheet and a zip of your receipts</th><td><span class="no" aria-hidden="true">–</span><span class="sr">Not included</span></td><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td></tr>
+            <tr><th scope="row">Accounting export for YNAB and Lunch Money</th><td><span class="no" aria-hidden="true">–</span><span class="sr">Not included</span></td><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td></tr>
+            <tr><th scope="row">Advanced search with running totals</th><td><span class="no" aria-hidden="true">–</span><span class="sr">Not included</span></td><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td></tr>
+            <tr><th scope="row">Alerts when spending looks unusual</th><td><span class="no" aria-hidden="true">–</span><span class="sr">Not included</span></td><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td></tr>
+            <tr><th scope="row">History per agent</th><td><span class="no" aria-hidden="true">–</span><span class="sr">Not included</span></td><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td></tr>
+            <tr><th scope="row">Audit trail</th><td><span class="no" aria-hidden="true">–</span><span class="sr">Not included</span></td><td>2+ seats</td></tr>
+            <tr><th scope="row">Renewals, mismatched charges and a monthly close</th><td><span class="no" aria-hidden="true">–</span><span class="sr">Not included</span></td><td class="muted">Later</td></tr>
+            <tr><th scope="row">Sync between your computers, and working together</th><td><span class="no" aria-hidden="true">–</span><span class="sr">Not included</span></td><td class="muted">Later</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="rule-top" aria-labelledby="cancel-h">
+    <div class="wrap narrow">
+      <div class="section-head"><h2 id="cancel-h">If you cancel</h2></div>
+      <div class="prose">
+        <p>Cancelling Pro never takes your data or the basic tracker. The Pro tools switch off when the year you paid for runs out. Everything you recorded stays on your computer, and the free tracker and plain export keep working exactly as before.</p>
+      </div>
+      <div class="faq below-l">
+        <details>
+          <summary>Do I need an account?</summary>
+          <div class="a"><p>No Twinslip account. Lemon Squeezy emails you a Pro key when you buy, and you paste it into the app once.</p></div>
+        </details>
+        <details>
+          <summary>Does Pro need the internet?</summary>
+          <div class="a"><p>Once, to switch it on. After that every Pro tool works offline. The app checks your key again about once a month, and if it can't get through it keeps working for another 30 days.</p></div>
+        </details>
+        <details>
+          <summary>Why yearly?</summary>
+          <div class="a"><p>Taxes and bookkeeping run on a yearly cycle, and so does most of the upkeep Pro pays for.</p></div>
+        </details>
+        <details>
+          <summary>Can I use Pro on more than one computer?</summary>
+          <div class="a"><p>Yes: each seat covers one person on up to two of their computers. To move to a new one, open Menu → Settings → Pro on the old computer and click "Remove Pro from this computer", then paste your key on the new one.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div>
+      <a class="brand" href="./"><img src="favicon.svg" alt="" width="30" height="30">Twinslip</a>
+      <p>Free expense tracking that keeps what your agents spent apart from what you spent. In beta.</p>
+      <p>Questions or something broken? <a href="https://github.com/graychar2425-blip/agent-ledger-site/issues">Tell us on GitHub</a>.</p>
+      <p>This site has no trackers, no analytics and no cookies. When Pro opens, its checkout loads Lemon Squeezy only after you click Buy.</p>
+    </div>
+    <nav aria-label="Product">
+      <a href="download.html">Download</a>
+      <a href="pro.html">Pro</a>
+      <a class="nav-wide" href="privacy.html">Privacy</a>
+    </nav>
+    <nav aria-label="For agents and developers">
+      <a href="agents.html">For agents and developers</a>
+      <a href="llms.txt">llms.txt</a>
+      <a href="agents.md">agents.md</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

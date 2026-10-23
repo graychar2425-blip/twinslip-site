@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Privacy | Twinslip</title>
+<meta name="description" content="What Twinslip stores on your computer, what it never stores, what your agent can do, and why this website has no tracking.">
+<link rel="canonical" href="https://graychar2425-blip.github.io/twinslip-site/privacy">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#121628">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Twinslip">
+<meta property="og:title" content="What Twinslip stores">
+<meta property="og:description" content="Your ledger lives on your computer. No account, no Twinslip server.">
+<meta property="og:url" content="https://graychar2425-blip.github.io/twinslip-site/privacy">
+<meta property="og:image" content="https://graychar2425-blip.github.io/twinslip-site/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="My agents cost me $278.11 last month, across 2 agents, all of it checked against my bank.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="fonts/newsreader-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/schibsted-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+<script src="main.js" defer></script>
+</head>
+<body class="page">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="favicon.svg" alt="" width="30" height="30">Twinslip</a>
+    <nav class="nav" aria-label="Main">
+      <a href="index.html#how">How it works</a>
+      <a href="pro.html">Pro</a>
+      <a href="agents.html">For agents</a>
+      <a class="nav-wide" href="privacy.html" aria-current="page">Privacy</a>
+      <a class="btn" href="download.html">Download</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="page-head">
+    <div class="wrap">
+      <h1>What Twinslip stores</h1>
+      <p class="lead">Your ledger lives on your computer, in a folder called <code>~/.twinslip</code>. There is no Twinslip account and no Twinslip server. A few things do leave your computer, through services you choose; they're listed below. This is the same list the app shows under Menu → What's stored.</p>
+    </div>
+  </div>
+
+  <section aria-labelledby="keeps-h">
+    <div class="wrap prose">
+      <h2 id="keeps-h">What it keeps</h2>
+      <ul>
+        <li>For each agent purchase: the amount, merchant, date, which agent, how it was paid (card, prepaid credits, crypto and so on), and a short note from the agent about what it was for, if it gave one.</li>
+        <li>Receipts: files you attach, and the details your agent finds in a receipt email (vendor, amount, date, subject line).</li>
+        <li>From a file you download from your bank: the date, amount and merchant text of each transaction. Ones that aren't agent purchases never mix with your agents' totals. They're kept so you can pull in one an agent missed, and they make up your Mine bucket.</li>
+        <li>Only if you connected the old SimpleFIN bank feed before it was retired on 6 October 2026: its transactions stay as they were, and its saved access link stays in a separate file only your user account can open. Nothing uses it now. Settings → "Remove saved access" deletes it; Twinslip never deletes it on its own.</li>
+        <li>What each agent may buy, if you write it (merchants, the most for one purchase, payment methods, an end date, a note), and which purchases fell outside it.</li>
+        <li>The name an agent gives the job a purchase paid for, scrubbed of anything that looks like a card number or key; and for many tiny payments, the exact total and payment count per merchant per day.</li>
+        <li>A usage log of counts (no merchants, amounts or names) for the beta report. It leaves your computer only if you copy it yourself.</li>
+        <li>If you buy Pro: your Pro key and when it was last checked, in a file only your user account can open.</li>
+      </ul>
+
+      <h2 class="below-l">What it never keeps</h2>
+      <ul>
+        <li>Card numbers, bank logins, passwords, or anyone's API keys. Text from agents is scrubbed of anything that looks like a card number, key or token before it's saved, and so are order references and bank descriptions.</li>
+        <li>What your agents do, say or read. Only what they pay.</li>
+      </ul>
+
+      <h2 class="below-l">What your agent can do</h2>
+      <ul>
+        <li>Add purchases and receipts, and read totals and its own budget.</li>
+        <li>It can't confirm, delete, hide, undo or change rules. What it adds either counts as its own spending or waits for your tap. A refund it reports, or a charge it claims that you haven't put under Agents, waits for your tap too.</li>
+        <li>Receipts it finds in your email are kept as evidence. Only a line from your bank's file, your iPhone, the local webhook or a receipt you attach marks a purchase ✓.</li>
+        <li>A misbehaving agent can at worst add an entry you then remove.</li>
+      </ul>
+
+      <h2 class="below-l">Email receipts</h2>
+      <p>Your own agent finds receipts, when you ask it, using the email access you already gave it. Twinslip never gets your email login and doesn't schedule sweeps. Receipt emails pass through your agent's AI provider, not through Twinslip. When your agent asks Twinslip for your totals or budget, the answer goes to your agent, so it passes through that provider too. Your ledger itself stays on your computer.</p>
+
+      <h2 class="below-l">What leaves your computer</h2>
+      <ul>
+        <li>Twinslip never sends your ledger to us; we don't run a server. It leaves as a file only if you export or copy it yourself.</li>
+        <li>Your agent's AI provider sees what your agent reads and is told: email it sweeps, and the totals and budget it asks Twinslip for. An agent running on your computer keeps that local; a cloud model doesn't.</li>
+        <li>If you use the iPhone app: the phone writes new purchases to a file in your own iCloud Drive, and your Mac writes a small summary of this month's totals back for the phone. Apple's iCloud terms apply.</li>
+        <li>Nothing goes to your bank, and Twinslip never logs into one.</li>
+        <li>If you buy Pro, the app contacts Lemon Squeezy, the checkout service, to switch your key on and to re-check it about once a month. It sends the key and a name for this computer. Never your purchases.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="rule-top" aria-labelledby="site-h">
+    <div class="wrap prose">
+      <h2 id="site-h">This website</h2>
+      <ul>
+        <li>No analytics, no trackers, no cookies, no third-party fonts. Every page loads only files from this site.</li>
+        <li>The one exception is the Pro page: when you click Buy, it loads Lemon Squeezy's checkout so you can pay. Lemon Squeezy handles your payment details under <a href="https://www.lemonsqueezy.com/privacy" rel="noopener">its own privacy policy</a>. We never see your card.</li>
+        <li>Our web host may keep standard server logs, like any website. We don't add anything to them.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div>
+      <a class="brand" href="./"><img src="favicon.svg" alt="" width="30" height="30">Twinslip</a>
+      <p>Free expense tracking that keeps what your agents spent apart from what you spent. In beta.</p>
+      <p>Questions or something broken? <a href="https://github.com/graychar2425-blip/agent-ledger-site/issues">Tell us on GitHub</a>.</p>
+      <p>This site has no trackers, no analytics and no cookies.</p>
+    </div>
+    <nav aria-label="Product">
+      <a href="download.html">Download</a>
+      <a href="pro.html">Pro</a>
+      <a class="nav-wide" href="privacy.html">Privacy</a>
+    </nav>
+    <nav aria-label="For agents and developers">
+      <a href="agents.html">For agents and developers</a>
+      <a href="llms.txt">llms.txt</a>
+      <a href="agents.md">agents.md</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,7 @@
+# Twinslip website. Everything here is public and meant to be read, by people and agents.
+User-agent: *
+Allow: /
+Disallow: /thanks.html
+Disallow: /assets/og-card.html
+
+Sitemap: https://graychar2425-blip.github.io/twinslip-site/sitemap.xml
