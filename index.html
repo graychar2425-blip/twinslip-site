@@ -5,15 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; script-src 'self'; style-src 'self'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<title>Twinslip: what did your agents cost you last month?</title>
-<meta name="description" content="Free expense tracking that keeps what your AI agents spent apart from what you spent. Agents report their own purchases, your bank's statement file or your iPhone checks them, and your ledger stays on your computer.">
+<title>Twinslip: track, verify and bill what your AI agents spend</title>
+<meta name="description" content="Twinslip records every purchase your AI agents make, checks it against your bank or card statement, flags spending outside each agent's budget and mandate, and turns client costs into billing statements. A Mac app, free for one agent and one bank or card account.">
 <link rel="canonical" href="https://graychar2425-blip.github.io/twinslip-site/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#121628">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Twinslip">
-<meta property="og:title" content="What did your agents cost you last month?">
-<meta property="og:description" content="Free, local-first expense tracking that keeps what your agents spent apart from what you spent.">
+<meta property="og:title" content="Twinslip: track, verify and bill what your AI agents spend">
+<meta property="og:description" content="Agents report each purchase as they pay. Your statements verify it, budgets and mandates flag what's out of bounds, and each client gets a statement with the evidence for every line.">
 <meta property="og:url" content="https://graychar2425-blip.github.io/twinslip-site/">
 <meta property="og:image" content="https://graychar2425-blip.github.io/twinslip-site/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -25,15 +25,29 @@
 <link rel="preload" href="fonts/schibsted-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css">
 <script src="main.js" defer></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Twinslip",
+  "url": "https://graychar2425-blip.github.io/twinslip-site/",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "macOS",
+  "description": "Records what AI agents spend as they pay, checks it against bank or card statements, flags purchases outside each agent's budget and mandate, and prepares client billing statements and a tax pack. Local-first, no account.",
+  "offers": [
+    { "@type": "Offer", "name": "Free", "price": "0", "priceCurrency": "USD", "description": "One agent and one bank or card account, with unlimited purchases, all history and export." }
+  ]
+}
+</script>
 </head>
-<body>
+<body class="page home">
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-head">
   <div class="wrap">
     <a class="brand" href="./"><img src="favicon.svg" alt="" width="30" height="30">Twinslip</a>
     <nav class="nav" aria-label="Main">
-      <a href="#how">How it works</a>
-      <a href="pro.html">Pro</a>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
       <a href="agents.html">For agents</a>
       <a class="nav-wide" href="privacy.html">Privacy</a>
       <a class="btn" href="download.html">Download</a>
@@ -42,95 +56,139 @@
 </header>
 
 <main id="main">
-  <section class="hero">
-    <img class="hero-photo" src="assets/photo/ledger-1819-1400.webp" srcset="assets/photo/ledger-1819-1400.webp 1400w, assets/photo/ledger-1819-2400.webp 2400w" sizes="100vw" alt="" fetchpriority="high">
+  <section class="hero" aria-labelledby="hero-h">
     <div class="wrap">
-      <h1>What did your agents cost you last month?</h1>
-      <div class="hero-foot">
-        <p class="lead">Your agents report what they spend the moment they pay. Your bank's statement file, your iPhone or a receipt you add checks it. Your ledger stays on your computer.</p>
-        <div class="hero-act">
+      <div class="hero-text">
+        <h1 id="hero-h">Track, verify and bill what your AI agents spend.</h1>
+        <div class="hero-side">
+          <p class="lead">Your agents report each purchase the moment they pay. Your bank or card statement verifies it, budgets flag what's out of bounds, and each client gets a statement with the evidence for every line.</p>
           <div class="actions">
-            <a class="btn" href="download.html">Download for Mac</a>
-            <a class="btn ghost" href="#how">See how it works</a>
+            <a class="btn" href="download.html">Download free</a>
+            <a class="btn ghost" href="#pricing">See pricing</a>
           </div>
-          <p class="fine">Free. No account. Mac beta now, iPhone app coming.</p>
+          <p class="fine">Mac app, in beta. Free for one agent and one bank or card account. No account to create.</p>
         </div>
       </div>
+      <figure class="hero-shot">
+        <img src="assets/photo/mac-desk-1400.webp" srcset="assets/photo/mac-desk-1400.webp 1400w, assets/photo/mac-desk-2400.webp 2400w" sizes="(max-width: 1448px) 100vw, 1320px" width="2400" height="1597" alt="Twinslip open on a MacBook: your agents have spent $441.87 so far in October, 59% checked against your bank or iPhone, with one agent over its monthly budget and another at 94% of its budget." fetchpriority="high">
+        <figcaption>Twinslip's home screen with demo data, placed on a photographed MacBook. Photo: Daniil Komov</figcaption>
+      </figure>
     </div>
-    <p class="photo-credit">An Italian account ledger, 1819. Photo: Donatello Trisolino</p>
   </section>
 
-  <section class="twice" aria-labelledby="twice-h">
+  <section class="connects" aria-labelledby="connects-h">
     <div class="wrap">
-      <h2 id="twice-h" class="twice-title">Seen twice, counted once.</h2>
-      <div class="twice-grid">
-        <figure class="twice-photo print" data-reveal>
-          <img src="assets/photo/paper-pair-1400.webp" srcset="assets/photo/paper-pair-1400.webp 1400w, assets/photo/paper-pair-2400.webp 2400w" sizes="(min-width: 960px) 44vw, 100vw" width="2400" height="1600" alt="" loading="lazy">
-          <figcaption>Two sheets of paper on a black table. Photo: Karolina Grabowska, Kaboompics</figcaption>
-        </figure>
-        <div class="twice-body">
-          <p class="twice-lead">An agent's report is the original. A line from your bank's statement file, your iPhone or a receipt you attach is the copy. When the two line up, the purchase is verified, and it counts once.</p>
-          <figure class="act" data-act aria-labelledby="act-sum">
-            <div class="act-stage">
-              <div class="act-slip act-copy">
-                <p class="act-from">Your bank's statement file</p>
-                <p class="act-line"><span>ANTHROPIC*API</span><span>50.00</span></p>
-                <p class="act-meta">Oct 5</p>
-              </div>
-              <div class="act-slip act-orig">
-                <p class="act-from">Reported by Muse</p>
-                <p class="act-line"><span>Anthropic</span><span>$50.00</span></p>
-                <p class="act-meta">Oct 5, paid by card</p>
-                <p class="act-state"><span class="state ok act-after"><svg class="slip" viewBox="0 0 16 16" aria-hidden="true"><rect class="copy" x="4.5" y="4.5" width="10" height="10.5" rx="1.5"/><rect class="orig" x="1" y="1" width="10" height="10.5" rx="1.5"/></svg>Checked against your bank</span><span class="state flag act-before" aria-hidden="true"><svg class="slip" viewBox="0 0 16 16" aria-hidden="true"><rect class="orig" x="1" y="1" width="10" height="10.5" rx="1.5"/></svg>Reported, not verified yet</span></p>
-              </div>
-            </div>
-            <figcaption class="act-sum" id="act-sum">Counted once: <strong>$50.00</strong> under Agents.</figcaption>
-          </figure>
-          <p class="twice-note">A receipt or bank alert your agent found itself is kept as evidence, never as the copy: an agent can't vouch for itself.</p>
-        </div>
-      </div>
+      <h2 id="connects-h">Connects to</h2>
+      <ul class="hosts">
+        <li>Claude Code</li>
+        <li>Claude Desktop</li>
+        <li>Cursor</li>
+        <li>Codex</li>
+        <li>ChatGPT desktop app</li>
+        <li>VS Code</li>
+        <li>Windsurf and Devin Desktop</li>
+        <li>Gemini CLI</li>
+        <li>Zed</li>
+      </ul>
+      <p class="hosts-note">Setup connects each app it finds on your Mac. Claude Code is verified end to end; the others are connected but not yet verified. Claude Code and Cowork can also install Twinslip as a plugin. <a href="agents.html">Details for developers</a></p>
     </div>
   </section>
 
-  <section class="rule-top" aria-labelledby="see-h">
+  <section id="features" class="rule-top" aria-labelledby="features-h">
     <div class="wrap">
       <div class="section-head">
-        <h2 id="see-h">One number, and everything behind it</h2>
-        <p>These are real screens from the app, filled with made-up purchases from two pretend agents, Muse and Scout.</p>
+        <h2 id="features-h">What it does</h2>
+        <p>One ledger for every purchase your agents make, from the moment they pay to the invoice your client receives. The screens are the real app with demo data.</p>
       </div>
-      <figure class="desk" data-reveal>
-        <img src="assets/photo/mac-desk-1400.webp" srcset="assets/photo/mac-desk-1400.webp 1400w, assets/photo/mac-desk-2400.webp 2400w" sizes="(max-width: 1180px) 100vw, 1120px" width="2400" height="1597" alt="Twinslip open on a MacBook on a wooden desk beside a pair of reading glasses: your agents have spent $441.87 so far in October, 59% checked against your bank or iPhone." loading="lazy">
-        <figcaption>Twinslip's home screen, placed on a photographed MacBook. Photo: Daniil Komov.</figcaption>
-      </figure>
-      <div class="shots">
-        <div>
-          <div class="tabs" role="tablist" aria-label="App screens" data-shots>
-            <button type="button" role="tab" id="t-home" aria-controls="p-home" aria-selected="true">Home</button>
-            <button type="button" role="tab" id="t-all" aria-controls="p-all" aria-selected="false" tabindex="-1">All purchases</button>
-            <button type="button" role="tab" id="t-subs" aria-controls="p-subs" aria-selected="false" tabindex="-1">Subscriptions</button>
-            <button type="button" role="tab" id="t-stored" aria-controls="p-stored" aria-selected="false" tabindex="-1">What's stored</button>
+
+      <div class="features">
+        <article class="feature">
+          <div class="feature-text">
+            <h3>Capture automatically</h3>
+            <p>Agents report each purchase as they make it: subscriptions, API credits and pay-per-use calls, with receipts from x402 and other payment rails kept as evidence. Card, prepaid credits or crypto. Nobody types anything in.</p>
+            <p class="feature-meta">Free</p>
           </div>
-          <figure class="panel" id="p-home" role="tabpanel" aria-labelledby="t-home">
-            <div class="frame"><img src="assets/app-home.webp" width="1332" height="1350" alt="Twinslip home screen with demo data. Your agents have spent $441.87 so far in October, on pace for $595.56, against $327.11 in September, 59% checked against your bank or iPhone; you spent $830.86 yourself, kept separate. Muse is over its $150.00 monthly budget and Scout is at 94% of its $200.00 budget. Worth a look: two purchases Scout made outside its mandate, Firecrawl $0.93 and Bright Data $75.00, each with Noted and Allow next time, and two services paid twice, Browserbase and Notion."></div>
-            <figcaption>Home: what your agents spent this month, how much of it your bank or iPhone has checked, what you spent yourself, and each agent's budget.</figcaption>
+          <figure class="feature-shot">
+            <div class="frame"><img src="assets/app-purchases.webp" width="1332" height="780" alt="All purchases for October. Firecrawl $0.93 paid in crypto by Scout and Exa $2.42 paid in crypto by Muse, both reported by the agent and not verified yet. Anthropic $50.00 paid by card, reported by Muse and verified by the bank, with a receipt Muse found kept as evidence." loading="lazy"></div>
+            <figcaption>All purchases: which agent paid, how, and what backs it up.</figcaption>
           </figure>
-          <figure class="panel" id="p-all" role="tabpanel" aria-labelledby="t-all" hidden>
-            <div class="frame"><img src="assets/app-purchases.webp" width="1332" height="780" alt="All purchases for October, with an Agents and Mine switch and a search box. Firecrawl $0.93 paid in crypto by Scout and Exa $2.42 paid in crypto by Muse, both reported by the agent and not verified yet. Anthropic $50.00 paid by card, reported by Muse and verified by the bank, with a receipt Muse found kept as evidence. Each row has Attach receipt, Expect a refund and Undo." loading="lazy"></div>
-            <figcaption>All purchases: who paid, how, and what backs it up. Search with running totals, like "openai last-month".</figcaption>
+        </article>
+
+        <article class="feature">
+          <div class="feature-text">
+            <h3>Verify against your cards</h3>
+            <p>Drop in the statement file your bank or card issuer offers, or import your Stripe Link wallet. When a statement line matches an agent's report, the purchase is marked verified and counted once. A charge no agent reported waits for one tap.</p>
+            <p class="feature-meta">Free for one bank or card account</p>
+          </div>
+          <figure class="feature-shot" aria-labelledby="verify-cap">
+            <ul class="entries proof">
+              <li><span class="m">Anthropic</span><span class="amt">$50.00</span><span class="d"><span>Oct 5, Muse</span><span class="state ok"><svg class="slip" viewBox="0 0 16 16" aria-hidden="true"><rect class="copy" x="4.5" y="4.5" width="10" height="10.5" rx="1.5"/><rect class="orig" x="1" y="1" width="10" height="10.5" rx="1.5"/></svg>Checked against your bank</span></span></li>
+              <li><span class="m">OpenRouter</span><span class="amt">$25.00</span><span class="d"><span>Oct 5, Muse</span><span class="state flag"><svg class="slip" viewBox="0 0 16 16" aria-hidden="true"><rect class="orig" x="1" y="1" width="10" height="10.5" rx="1.5"/></svg>Reported, not verified yet</span></span></li>
+              <li><span class="m">Browserbase</span><span class="amt">$39.00</span><span class="d"><span>Oct 3, from your bank</span><span class="state wait"><svg class="slip" viewBox="0 0 16 16" aria-hidden="true"><rect class="orig" x="1" y="1" width="10" height="10.5" rx="1.5"/></svg>No agent reported it: waiting for your tap</span></span></li>
+            </ul>
+            <figcaption id="verify-cap">Every line says what backs it up. A receipt an agent finds is kept as evidence; only your bank or card statement, a receipt you attach or, once its app ships, your iPhone verifies a purchase.</figcaption>
           </figure>
-          <figure class="panel" id="p-subs" role="tabpanel" aria-labelledby="t-subs" hidden>
-            <div class="frame"><img src="assets/app-subscriptions.webp" width="1332" height="870" alt="Subscriptions agents started: about $143.12 a month across 6 active subscriptions. Browserbase $39.00 and ElevenLabs $22.00 started by Muse; Vercel $20.00, AWS $13.12 and Browserbase $39.00 started by Scout." loading="lazy"></div>
-            <figcaption>Subscriptions your agents started, found from repeat charges, with the monthly cost and the next charge date.</figcaption>
+        </article>
+
+        <article class="feature">
+          <div class="feature-text">
+            <h3>Control spend</h3>
+            <p>Give each agent a monthly budget and a mandate: the merchants it may buy from and the most it may spend at once. Purchases outside those are flagged, and so is a service you're paying for twice. With Pro, scheduled checks and alerts for unusual spending reach you without opening the app.</p>
+            <p class="feature-meta">Budgets and mandates free. Alerts and scheduled checks with Pro</p>
+          </div>
+          <figure class="feature-shot">
+            <div class="frame crop-low"><img src="assets/app-home.webp" width="1332" height="1350" alt="Twinslip home screen with demo data. Muse is over its $150.00 monthly budget and Scout is at 94% of its $200.00 budget. Worth a look: Scout bought outside its mandate from Firecrawl, $0.93, and Bright Data, $75.00, which is also over Scout's $50.00 limit for one purchase, each with Noted and Allow next time. Browserbase is paid twice." loading="lazy"></div>
+            <figcaption>Budgets, purchases outside an agent's mandate, and services paid twice, on the home screen.</figcaption>
           </figure>
-          <figure class="panel" id="p-stored" role="tabpanel" aria-labelledby="t-stored" hidden>
-            <div class="frame"><img src="assets/app-whats-stored.webp" width="1332" height="1275" alt="The What Twinslip stores page: your ledger stays on this computer, what leaves it, what it keeps, what it never keeps, and what your agent can do." loading="lazy"></div>
-            <figcaption>What's stored: the app's own page about your data. The same list is on <a href="privacy.html">our privacy page</a>.</figcaption>
+        </article>
+
+        <article class="feature">
+          <div class="feature-text">
+            <h3>Bill clients</h3>
+            <p>Agents tag each purchase with a job and a client. Each client gets a statement as a PDF and a spreadsheet, every line with its evidence and your handling fee as its own line, plus invoice lines to import into your invoicing app. Mark lines billed with your invoice number so nothing is billed twice.</p>
+            <p class="feature-meta">Pro. What each job cost, and a preview of each statement, are free</p>
+          </div>
+          <figure class="feature-shot">
+            <div class="frame tall"><img src="assets/app-statement.webp" width="1132" height="1316" alt="Bill Northwind Outfitters: a statement of AI costs from Fieldnote Studio. Four lines for the Q3 market report: Exa $10.00 and OpenAI $34.00 checked against the bank, OpenAI $18.40 and Exa $2.42 marked agent report only. Subtotal $64.82, handling fee (10%) $6.48, total $71.30. Buttons to download the PDF, the CSV and invoice lines, and to mark the lines billed with an invoice number." loading="lazy"></div>
+            <figcaption>A client statement in the demo: two lines checked against the bank, two marked as the agent's report only, and a 10% handling fee.</figcaption>
           </figure>
+        </article>
+
+        <article class="feature">
+          <div class="feature-text">
+            <h3>Hand your accountant one file</h3>
+            <p>The tax pack is one zip for the year: a PDF summary by agent, merchant and month, a spreadsheet with what verified each purchase, and the receipts themselves. Records for your accountant, not tax advice. Exports for YNAB and Lunch Money too.</p>
+            <p class="feature-meta">Pro. Plain spreadsheet export is free</p>
+          </div>
+          <figure class="feature-shot" aria-labelledby="pack-cap">
+            <ul class="files">
+              <li><span class="fname">Twinslip-tax-pack-2026.zip</span><span class="fwhat">One file for your accountant</span></li>
+              <li><span class="fname">summary-2026.pdf</span><span class="fwhat">Totals by agent, merchant and month</span></li>
+              <li><span class="fname">agent-purchases-2026.csv</span><span class="fwhat">One row per purchase, with what verified it</span></li>
+              <li><span class="fname">receipts/</span><span class="fwhat">The receipt files themselves</span></li>
+            </ul>
+            <figcaption id="pack-cap">What the tax pack holds, named as the app names it.</figcaption>
+          </figure>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="who" class="rule-top" aria-labelledby="who-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="who-h">Who it's for</h2>
+        <p>Anyone whose agents spend money that has to be accounted for.</p>
+      </div>
+      <div class="who">
+        <div>
+          <h3>Agencies and consultants</h3>
+          <p>Your agents do client work, and their AI costs belong on the client's invoice. Twinslip keeps what each job cost, adds your handling fee, and gives you a statement with the evidence for every line, so the bill holds up when a client asks.</p>
         </div>
-        <figure class="phone">
-          <div class="frame"><img src="assets/app-phone.webp" width="585" height="1266" alt="The same ledger at phone width: $441.87 spent by agents so far in October, and $830.86 spent by you, kept separate." loading="lazy"></div>
-          <figcaption>The same ledger in a narrow window.</figcaption>
-        </figure>
+        <div>
+          <h3>Developers and teams running agents</h3>
+          <p>Your agents buy API credits, subscriptions and pay-per-use calls on your cards. Twinslip puts every purchase in one ledger, checks it against your statements, and flags an agent that buys outside its budget or mandate. Pro is priced per person; with two seats or more it adds an audit trail.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -139,124 +197,29 @@
     <div class="wrap">
       <div class="section-head">
         <h2 id="how-h">How it works</h2>
-        <p>You set it up once. After that your agents do the reporting and you answer the odd question.</p>
+        <p>Set it up once. After that your agents do the reporting.</p>
       </div>
       <ol class="steps">
         <li>
-          <h3>Your agent says what it paid</h3>
-          <p>Right after it pays for something, like API credits, a domain or a new subscription, your agent records the amount, the merchant and the date. Card, prepaid credits or crypto all count.</p>
+          <h3>Install and connect</h3>
+          <p>Download the Mac app and double-click to set it up. It connects the agent apps it finds. Then tell your agent "Set up Twinslip." and it does the rest.</p>
         </li>
         <li>
-          <h3>Your bank checks its word</h3>
-          <p>When your bank's statement file, your iPhone or a receipt you attach shows the same charge, it's marked verified. Until then it's flagged, so you know which numbers to trust.</p>
+          <h3>Agents report as they pay</h3>
+          <p>Each purchase lands in the ledger with the amount, merchant, date, job and client. Agents can check their own budget before a sizeable purchase.</p>
         </li>
         <li>
-          <h3>Anything nobody claimed asks you once</h3>
-          <p>A charge no agent reported waits for one tap: Mine or Agents. The app learns from your answers and suggests the likely one next time.</p>
+          <h3>Verify, bill and export</h3>
+          <p>Add your bank or card statement file to verify what agents reported. Then send client statements, hand over the tax pack, or export a spreadsheet.</p>
         </li>
       </ol>
     </div>
   </section>
 
-  <section class="rule-top" aria-labelledby="card-h">
-    <div class="wrap papers">
-      <div class="section-head">
-        <h2 id="card-h">Your month, on one card</h2>
-        <p class="card-caption">At the end of each month Twinslip makes you this card to share if you want to. It never shows merchants, your own spending, or your agents' names unless you switch names on.</p>
-      </div>
-      <div class="card-wrap">
-        <div class="card-stack">
-        <div class="copy-slip" aria-hidden="true"></div>
-        <figure class="share-card" aria-labelledby="card-text">
-          <div class="card-brand"><img src="favicon.svg" alt="" width="22" height="22">Twinslip</div>
-          <div id="card-text">
-            <p class="headline">My agents cost me <strong>$278.11</strong> last month.</p>
-            <p class="line">across 2 agents · all of it checked against my bank</p>
-          </div>
-          <p class="foot">What did your agents cost you?</p>
-        </figure>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="rule-top" aria-labelledby="buckets-h">
+  <section id="pricing" class="rule-top" aria-labelledby="plans-h">
     <div class="wrap">
       <div class="section-head">
-        <h2 id="buckets-h">Two buckets that never mix</h2>
-        <p>Your coffee and your agent's API bill don't belong in the same total. Twinslip keeps them apart, so "what did the agents cost?" has a straight answer.</p>
-      </div>
-      <div class="buckets">
-        <div class="bucket agents">
-          <div class="bucket-head"><h3>Agents</h3><span class="bucket-total" data-total="agents" data-cents="8700">$87.00</span></div>
-          <ul class="entries" data-entries="agents">
-            <li><span class="m">Anthropic</span><span class="amt">$50.00</span><span class="d"><span>Oct 5, Muse</span><span class="state ok"><svg class="slip" viewBox="0 0 16 16" aria-hidden="true"><rect class="copy" x="4.5" y="4.5" width="10" height="10.5" rx="1.5"/><rect class="orig" x="1" y="1" width="10" height="10.5" rx="1.5"/></svg>Checked against your bank</span></span></li>
-            <li><span class="m">OpenRouter</span><span class="amt">$25.00</span><span class="d"><span>Oct 5, Muse</span><span class="state flag"><svg class="slip" viewBox="0 0 16 16" aria-hidden="true"><rect class="orig" x="1" y="1" width="10" height="10.5" rx="1.5"/></svg>Reported, not verified yet</span></span></li>
-            <li><span class="m">Apify</span><span class="amt">$12.00</span><span class="d"><span>Oct 4, Scout</span><span class="state flag"><svg class="slip" viewBox="0 0 16 16" aria-hidden="true"><rect class="orig" x="1" y="1" width="10" height="10.5" rx="1.5"/></svg>Reported, not verified yet</span></span></li>
-          </ul>
-        </div>
-        <div class="bucket mine">
-          <div class="bucket-head"><h3>Mine</h3><span class="bucket-total" data-total="mine" data-cents="7570">$75.70</span></div>
-          <ul class="entries" data-entries="mine">
-            <li><span class="m">Corner Grocery</span><span class="amt">$61.20</span><span class="d"><span>Oct 4</span><span class="state src">From your bank</span></span></li>
-            <li><span class="m">Blue Door Coffee</span><span class="amt">$14.50</span><span class="d"><span>Oct 2</span><span class="state src">From your bank</span></span></li>
-          </ul>
-        </div>
-      </div>
-      <div class="ask" data-ask data-merchant="Browserbase" data-cents="3900">
-        <div class="who">
-          <div class="m"><span class="state wait"><svg class="slip" viewBox="0 0 16 16" aria-hidden="true"><rect class="orig" x="1" y="1" width="10" height="10.5" rx="1.5"/></svg><span class="sr">Waiting for you: </span></span>Browserbase, $39.00, Oct 3</div>
-          <div class="q">Your bank saw this charge, but no agent reported it. Whose was it?</div>
-        </div>
-        <div class="pick">
-          <button type="button" data-bucket="mine" class="mine">Mine</button>
-          <button type="button" data-bucket="agents">Agents</button>
-        </div>
-      </div>
-      <p class="small muted below">An example with made-up purchases. Try the buttons.</p>
-      <div class="legend">
-        <div><h3><span class="state ok"><svg class="slip" viewBox="0 0 16 16" aria-hidden="true"><rect class="copy" x="4.5" y="4.5" width="10" height="10.5" rx="1.5"/><rect class="orig" x="1" y="1" width="10" height="10.5" rx="1.5"/></svg></span>Verified</h3><p>An agent reported it and your bank, your iPhone or a receipt you attached saw the charge too. Counted once, even when three sources saw it.</p></div>
-        <div><h3><span class="state flag"><svg class="slip" viewBox="0 0 16 16" aria-hidden="true"><rect class="orig" x="1" y="1" width="10" height="10.5" rx="1.5"/></svg></span>Reported, not verified yet</h3><p>Only the agent has vouched for it so far, maybe with a receipt it found in your email. It counts, and it's flagged until your bank, your iPhone or a receipt you add backs it up.</p></div>
-        <div><h3><span class="state wait"><svg class="slip" viewBox="0 0 16 16" aria-hidden="true"><rect class="orig" x="1" y="1" width="10" height="10.5" rx="1.5"/></svg></span>Unattributed</h3><p>Money left your account and nobody claimed it. One tap files it as Mine or Agents.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="rule-top" aria-labelledby="trust-h">
-    <figure class="pen print" data-reveal>
-      <img src="assets/photo/fountain-pen-1400.webp" srcset="assets/photo/fountain-pen-1400.webp 1400w, assets/photo/fountain-pen-2400.webp 2400w" sizes="100vw" width="2400" height="1600" alt="" loading="lazy">
-      <figcaption>Photo: cottonbro studio</figcaption>
-    </figure>
-    <div class="wrap">
-      <div class="section-head">
-        <h2 id="trust-h">What it knows about you, and what it doesn't</h2>
-      </div>
-      <dl class="trust">
-        <div>
-          <dt>Amounts, merchants and dates. That's about it.</dt>
-          <dd>No card numbers, no passwords, no API keys. Anything that looks like one is scrubbed before it's saved. It never sees what your agents did or said, only what they paid.</dd>
-        </div>
-        <div>
-          <dt>It lives on your computer</dt>
-          <dd>Your ledger is a file on your own machine. There's no Twinslip account and no Twinslip server holding a copy. Your agent's AI provider does see what your agent reads, like the totals it asks for; <a href="privacy.html">the privacy page</a> lists everything that leaves.</dd>
-        </div>
-        <div>
-          <dt>No bank logins, no Plaid</dt>
-          <dd>Twinslip never asks for your bank password and uses no bank-connection service. Bank data comes in only if you choose to add it: a file you download from your bank's website and drop in.</dd>
-        </div>
-        <div>
-          <dt>Your agent can add and read. That's all.</dt>
-          <dd>It can record purchases and check totals and its budget. It can't confirm, delete or hide anything: what it adds either counts as its own spending or waits for your tap. The worst a confused agent can do is add an entry you then remove.</dd>
-        </div>
-      </dl>
-      <p class="below-l"><a href="privacy.html">The full list of what's stored</a></p>
-    </div>
-  </section>
-
-  <section class="rule-top" aria-labelledby="plans-h">
-    <div class="wrap">
-      <div class="section-head">
-        <h2 id="plans-h">Free to use. Pro if you rely on it.</h2>
+        <h2 id="plans-h">Pricing</h2>
         <p>The tracker is free and stays free. Pro is for people who hand the numbers to an accountant, a client or a tax form.</p>
       </div>
       <div class="plans">
@@ -300,42 +263,74 @@
     </div>
   </section>
 
+  <section id="security" class="rule-top compact" aria-labelledby="security-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="security-h">Security and data</h2>
+        <p>Your ledger stays yours. <a href="privacy.html">The privacy page</a> lists everything that leaves your computer, including what your agent's own AI provider sees.</p>
+      </div>
+      <ul class="facts">
+        <li><h3>On your Mac</h3><p>The ledger is a file on your own computer. No Twinslip server holds a copy.</p></li>
+        <li><h3>No account</h3><p>Download it and use it. Pro is a key you paste in once, not a login.</p></li>
+        <li><h3>No bank logins</h3><p>You add statement files you download yourself. No bank passwords, no Plaid.</p></li>
+        <li><h3>Agents can't erase</h3><p>Agents can add and read. They can't confirm, delete or hide an entry.</p></li>
+      </ul>
+    </div>
+  </section>
+
   <section class="rule-top" aria-labelledby="faq-h">
     <div class="wrap narrow">
       <div class="section-head"><h2 id="faq-h">Questions</h2></div>
       <div class="faq">
         <details>
-          <summary>Do I need to know how to code?</summary>
-          <div class="a"><p>No. You download a folder, double-click a file, and tell your agent "Set up Twinslip." Your agent does the rest. The <a href="download.html">download page</a> walks through every click, including the one security prompt your Mac shows the first time.</p></div>
+          <summary>How much does it cost?</summary>
+          <div class="a"><p>Free covers one agent and one bank or card account, with every purchase, all your history and plain export. Pro is $10 a month or $96 a year per person and covers every agent and every account, plus client billing, alerts, the tax pack and accounting exports. Pro opens in February 2027; anyone who buys by 15 April 2027 pays $72 a year for as long as they stay subscribed. <a href="pro.html">See Pro</a>.</p></div>
         </details>
         <details>
-          <summary>Which agents does it work with?</summary>
-          <div class="a"><p>Claude Code, checked end to end. Setup also connects Claude Desktop, ChatGPT and Codex, Cursor, VS Code, Gemini CLI, Zed, Windsurf and Devin Desktop if it finds them, but we haven't checked those end to end yet. Other agents and scripts can report a purchase with one command (untested so far); the <a href="agents.html">page for agents and developers</a> has the details.</p></div>
+          <summary>What counts as a seat?</summary>
+          <div class="a"><p>A seat is one person, not an agent or a device, on up to two of their computers. With two seats or more, Pro also keeps an audit trail.</p></div>
         </details>
         <details>
-          <summary>What if my agent forgets to report something?</summary>
-          <div class="a"><p>If you've added your bank's statement file, or your agent has swept your email for receipts, the charge still shows up. It lands in the inbox as unattributed and asks you once: Mine or Agents.</p></div>
+          <summary>Which agent apps does it work with?</summary>
+          <div class="a"><p>Claude Code, verified end to end. Setup also connects Claude Desktop, Cursor, Codex and the ChatGPT desktop app, VS Code, Windsurf and Devin Desktop, Gemini CLI and Zed when it finds them; those are connected but not yet verified end to end. Other agents and scripts can report a purchase with one command (untested so far). The <a href="agents.html">page for agents and developers</a> has the details.</p></div>
         </details>
         <details>
-          <summary>Could an agent hide what it spent?</summary>
-          <div class="a"><p>No. Agents can add and read. They can't confirm, delete or hide anything: what they add either counts as their own spending or waits for your tap. A refund an agent reports waits for your tap before it lowers a total. What it can do is fail to report: a payment it never mentions, made outside your bank (prepaid credits, crypto, another card), stays unseen unless another source catches it. Card payments show up when you import your bank's statement.</p></div>
+          <summary>Where is my data kept?</summary>
+          <div class="a"><p>In a file on your own computer. There's no Twinslip account and no Twinslip server holding a copy. It stores amounts, merchants and dates, never card numbers, passwords or API keys. Your agent's AI provider does see what your agent reads, like the totals it asks for; <a href="privacy.html">the privacy page</a> lists everything that leaves.</p></div>
         </details>
         <details>
           <summary>Does it connect to my bank?</summary>
-          <div class="a"><p>No. It never logs into your bank and uses no bank-connection service like Plaid. To check purchases against your bank, download the statement file (CSV) your bank's website offers and drop it in. Without it, your agents' own reports and your receipts still work.</p></div>
+          <div class="a"><p>No. It never logs into your bank and uses no bank-connection service like Plaid. To verify purchases, download the statement file (CSV) your bank or card issuer offers and drop it in. Without it, your agents' own reports and your receipts still work.</p></div>
         </details>
         <details>
-          <summary>Is it really free?</summary>
-          <div class="a"><p>Yes, for one agent and one bank or card account. Tracking, both buckets, the inbox, budgets, what each agent may buy, the cost of each job, every purchase, all your history, warnings when a source is out of date, and plain export are free and stay free. Purchases from other agents are saved in your inbox, never dropped, and count once you have Pro. <a href="pro.html">Pro</a> covers every agent and account, and adds billing your clients for those costs (a statement per client, invoice lines, costs marked billed), ongoing oversight (follow-up on missing refunds and gaps, a briefing) and the tools you need when other people rely on your numbers, like a tax pack and accounting exports.</p></div>
+          <summary>Could an agent hide what it spent?</summary>
+          <div class="a"><p>No. Agents can add and read. They can't confirm, delete or hide anything: what they add either counts as their own spending or waits for your tap. What an agent can do is fail to report: a payment made outside your bank (prepaid credits, crypto, another card) stays unseen unless another source catches it. Card payments show up when you import your statement.</p></div>
         </details>
         <details>
-          <summary>What happens if I stop paying for Pro?</summary>
-          <div class="a"><p>The Pro tools switch off. Your data stays exactly where it is, and everything already counted stays counted. From then on, purchases from agents beyond the free one wait in your inbox again, saved in full.</p></div>
+          <summary>What happens if I cancel Pro?</summary>
+          <div class="a"><p>The Pro tools switch off when the time you paid for runs out. Your data stays exactly where it is, and everything already counted stays counted. From then on, purchases from agents beyond the free one wait in your inbox, saved in full.</p></div>
+        </details>
+        <details>
+          <summary>Do I need to know how to code?</summary>
+          <div class="a"><p>No. You download a folder, double-click a file, and tell your agent "Set up Twinslip." Your agent does the rest. The <a href="download.html">download page</a> walks through every click.</p></div>
         </details>
         <details>
           <summary>Does it work on Windows or iPhone?</summary>
-          <div class="a"><p>The beta download is for Mac. An iPhone app is on the way; it will pass Wallet (Apple Pay) taps and the bank texts you set up from your phone to the Mac, rather than keep a ledger of its own.</p></div>
+          <div class="a"><p>The beta download is for Mac. An iPhone app is on the way; it will pass Wallet (Apple Pay) taps and bank texts to the Mac rather than keep a ledger of its own.</p></div>
         </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="closing rule-top" aria-labelledby="closing-h">
+    <div class="wrap">
+      <h2 id="closing-h">Start with one agent, free.</h2>
+      <div class="closing-side">
+        <p>Download the Mac app, connect your agent and add one card. Move to Pro when you bill clients or run more agents.</p>
+        <div class="actions">
+          <a class="btn" href="download.html">Download free</a>
+          <a class="btn ghost" href="pro.html">See Pro</a>
+        </div>
       </div>
     </div>
   </section>
@@ -345,7 +340,7 @@
   <div class="wrap">
     <div>
       <a class="brand" href="./"><img src="favicon.svg" alt="" width="30" height="30">Twinslip</a>
-      <p>Free expense tracking that keeps what your agents spent apart from what you spent. In beta.</p>
+      <p>Track, verify and bill what your AI agents spend. A Mac app, in beta.</p>
       <p>This site has no trackers, no analytics and no cookies.</p>
       <p>Questions or something broken? <a href="https://github.com/graychar2425-blip/agent-ledger-site/issues">Tell us on GitHub</a>.</p>
     </div>

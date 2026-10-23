@@ -8,15 +8,15 @@
 <!-- "Tell me when Pro opens": FormSubmit's AJAX address (https://formsubmit.co/ajax/...), written by
      scripts/publish-site.sh from its optional third argument. Empty: the form shows a plain note instead. -->
 <meta name="twinslip:pro-list-url" content="https://formsubmit.co/ajax/dan@hilltopmanagementgroup.com">
-<title>Twinslip Pro</title>
-<meta name="description" content="Twinslip is free for one agent and one bank or card account. Pro covers every agent and account, and bills your clients for the AI costs of their work: a statement per client with how every line was checked, invoice lines, and costs marked billed. It also adds follow-up on what needs you, a tax pack, accounting exports, advanced search, unusual-spend alerts and per-agent history. $10 a month or $96 a year per person. Your ledger lives on your computer. We never see it.">
+<title>Twinslip Pro: bill clients for what your agents spend</title>
+<meta name="description" content="Twinslip Pro bills your clients for your AI agents' costs: a statement per client with the evidence for every line, your handling fee, invoice lines and costs marked billed. It covers every agent and every bank or card account, and adds alerts, scheduled checks, a tax pack and accounting export. $10 a month or $96 a year per person, from February 2027.">
 <link rel="canonical" href="https://graychar2425-blip.github.io/twinslip-site/pro">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#121628">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Twinslip">
-<meta property="og:title" content="Twinslip Pro">
-<meta property="og:description" content="Pro pays for itself the first time you bill a client: a statement per client with how every line was checked, invoice lines, and costs marked billed. Your ledger lives on your computer. We never see it.">
+<meta property="og:title" content="Twinslip Pro: bill clients for what your agents spend">
+<meta property="og:description" content="A statement per client with the evidence for every line, invoice lines and costs marked billed; every agent and account; alerts, a tax pack and accounting export. $10 a month or $96 a year per person.">
 <meta property="og:url" content="https://graychar2425-blip.github.io/twinslip-site/pro">
 <meta property="og:image" content="https://graychar2425-blip.github.io/twinslip-site/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -37,8 +37,8 @@
   <div class="wrap">
     <a class="brand" href="./"><img src="favicon.svg" alt="" width="30" height="30">Twinslip</a>
     <nav class="nav" aria-label="Main">
-      <a href="index.html#how">How it works</a>
-      <a href="pro.html" aria-current="page">Pro</a>
+      <a href="index.html#features">Features</a>
+      <a href="pro.html" aria-current="page">Pricing</a>
       <a href="agents.html">For agents</a>
       <a class="nav-wide" href="privacy.html">Privacy</a>
       <a class="btn" href="download.html">Download</a>
@@ -49,8 +49,8 @@
 <main id="main">
   <div class="page-head">
     <div class="wrap">
-      <h1>Pro pays for itself the first time you bill a client.</h1>
-      <p class="lead">Free covers one agent and one bank or card account, with every purchase and all your history. Pro covers every agent and every account. If your agents' costs are your clients' costs, Pro also turns them into a statement you can send: every line with how it was checked, your handling fee as its own line, and the lines marked billed with your invoice number. It keeps watch over your agents' spending and adds what an accountant or a tax form needs.</p>
+      <h1>Bill clients for what your agents spend.</h1>
+      <p class="lead">Pro is $10 a month or $96 a year per person. It covers every agent and every bank or card account, turns your agents' costs into client statements and invoice lines, alerts you when spending looks wrong, and hands your accountant a tax pack. Free covers one agent and one bank or card account, with every purchase and all your history.</p>
     </div>
   </div>
 
@@ -65,6 +65,7 @@
         </div>
         <div class="buy-closed">
           <a class="btn" href="download.html">Get the free app</a>
+          <a class="btn ghost" href="#notify-h">Tell me when Pro opens</a>
           <p class="small muted below">A seat is one person, not an agent or a device, on up to two of their computers. With two seats or more you also get the audit trail.</p>
         </div>
         <template id="buy-live">
@@ -101,7 +102,44 @@
     </div>
   </section>
 
-  <section class="rule-top" aria-labelledby="notify-h">
+  <section class="rule-top" aria-labelledby="adds-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="adds-h">What Pro adds</h2>
+        <p>Pro pays for itself the first time you bill a client.</p>
+      </div>
+      <div class="pro-case">
+        <figure>
+          <div class="frame tall"><img src="assets/app-statement.webp" width="1132" height="1316" alt="Bill Northwind Outfitters: a statement of AI costs from Fieldnote Studio. Four lines for the Q3 market report: Exa $10.00 and OpenAI $34.00 checked against the bank, OpenAI $18.40 and Exa $2.42 marked agent report only. Subtotal $64.82, handling fee (10%) $6.48, total $71.30. Buttons to download the PDF, the CSV and invoice lines, and to mark the lines billed with an invoice number." loading="lazy"></div>
+          <figcaption>A client statement in the app's demo, with a 10% handling fee.</figcaption>
+        </figure>
+        <ul class="adds">
+          <li>
+            <h3>Bill clients</h3>
+            <p>A statement per client and month, as a PDF and a spreadsheet, with how every line was checked and your handling fee as its own line. Invoice lines as a plain CSV for your invoicing app, and lines marked billed with your invoice number so nothing is billed twice. Twinslip never sends an invoice itself.</p>
+          </li>
+          <li>
+            <h3>Every agent and every account</h3>
+            <p>Free counts one agent and checks against one bank or card account. Pro counts every agent's purchases and lets every account verify them.</p>
+          </li>
+          <li>
+            <h3>Alerts and scheduled checks</h3>
+            <p>Checks on a schedule, notifications and a short briefing of what was checked and what needs you: unusual spending, missing refunds, gaps in coverage and sources that stopped checking.</p>
+          </li>
+          <li>
+            <h3>Tax pack and accounting export</h3>
+            <p>One zip for your accountant with a PDF summary, a spreadsheet and your receipts, plus exports for YNAB and Lunch Money. Records, not tax advice.</p>
+          </li>
+          <li>
+            <h3>Search, history and an audit trail</h3>
+            <p>Advanced search with running totals, history per agent, and an audit trail with two seats or more.</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="rule-top compact" aria-labelledby="notify-h">
     <div class="wrap narrow">
       <div class="section-head"><h2 id="notify-h">Tell me when Pro opens</h2></div>
       <p id="notify-none" class="muted">The sign-up isn't open on this copy of the page. Pro opens in February 2027, and this page will say so.</p>
@@ -118,24 +156,9 @@
     </div>
   </section>
 
-  <section class="rule-top" aria-labelledby="why-h">
-    <div class="wrap">
-      <div class="section-head"><h2 id="why-h">Why it's a subscription</h2></div>
-      <div class="promise">
-        <p>Your ledger lives on your computer. We never see it. You pay us to keep the watch steady and the tools sharp: checks that flag what needs you, tax forms current every year, and parsers maintained as banks and platforms change underneath you.</p>
-        <p>Sync between your computers, shared views, renewal tracking and a monthly close are still on the way. They aren't part of Pro yet, and we'll say so here when they are.</p>
-      </div>
-    </div>
-  </section>
-
-  <figure class="counter print" data-reveal>
-    <img src="assets/photo/stamps-counter-1400.webp" srcset="assets/photo/stamps-counter-1400.webp 1400w, assets/photo/stamps-counter-2400.webp 2400w" sizes="100vw" width="2400" height="1483" alt="" loading="lazy">
-    <figcaption>Stamps and forms on an old office counter. Photo: Ylanite Koppens</figcaption>
-  </figure>
-
   <section class="rule-top" aria-labelledby="cmp-h">
     <div class="wrap">
-      <div class="section-head"><h2 id="cmp-h">What you get</h2></div>
+      <div class="section-head"><h2 id="cmp-h">Free and Pro compared</h2></div>
       <div class="compare-wrap">
         <table class="compare">
           <caption class="sr">Free and Pro features compared</caption>
@@ -213,7 +236,7 @@
   <div class="wrap">
     <div>
       <a class="brand" href="./"><img src="favicon.svg" alt="" width="30" height="30">Twinslip</a>
-      <p>Free expense tracking that keeps what your agents spent apart from what you spent. In beta.</p>
+      <p>Track, verify and bill what your AI agents spend. A Mac app, in beta.</p>
       <p>Questions or something broken? <a href="https://github.com/graychar2425-blip/agent-ledger-site/issues">Tell us on GitHub</a>.</p>
       <p>This site has no trackers, no analytics and no cookies. When Pro opens, its checkout loads Lemon Squeezy only after you click Buy. The "Tell me when Pro opens" form sends your email to FormSubmit only when you press its button.</p>
     </div>

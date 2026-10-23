@@ -1,6 +1,6 @@
 # Twinslip
 
-> Free, local-first expense tracking that keeps what your AI agents spent apart from what you spent (two buckets: Mine and Agents). Agents report their own purchases the moment they pay, through a local MCP server. The user's bank CSV, their iPhone or a receipt they add checks what agents report; receipts and bank alerts an agent finds are kept as evidence. The ledger lives on the user's computer, with no account and no Twinslip server; what an agent reads still passes through its own AI provider. No bank logins and no bank aggregators.
+> Twinslip tracks, verifies and bills what AI agents spend. Agents report each purchase through a local MCP server the moment they pay; the user's bank or card statement file, their Stripe Link record or their iPhone verifies it; budgets and per-agent mandates flag out-of-bounds buying; and each client gets a billing statement with the evidence for every line (Pro). Receipts and bank alerts an agent finds are kept as evidence, never as verification. A local-first Mac app: the ledger lives on the user's computer, with no account and no Twinslip server, and agent spending is kept apart from the user's own; what an agent reads still passes through its own AI provider. No bank logins and no bank aggregators.
 
 Key facts for agents:
 
