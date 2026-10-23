@@ -45,17 +45,51 @@
   <section class="hero">
     <img class="hero-photo" src="assets/photo/ledger-1819-1400.webp" srcset="assets/photo/ledger-1819-1400.webp 1400w, assets/photo/ledger-1819-2400.webp 2400w" sizes="100vw" alt="" fetchpriority="high">
     <div class="wrap">
-      <div class="hero-copy">
-        <h1>What did your agents cost you last month?</h1>
+      <h1>What did your agents cost you last month?</h1>
+      <div class="hero-foot">
         <p class="lead">Your agents report what they spend the moment they pay. Your bank's statement file, your iPhone or a receipt you add checks it. Your ledger stays on your computer.</p>
-        <div class="actions">
-          <a class="btn" href="download.html">Download for Mac</a>
-          <a class="btn ghost" href="#how">See how it works</a>
+        <div class="hero-act">
+          <div class="actions">
+            <a class="btn" href="download.html">Download for Mac</a>
+            <a class="btn ghost" href="#how">See how it works</a>
+          </div>
+          <p class="fine">Free. No account. Mac beta now, iPhone app coming.</p>
         </div>
-        <p class="fine">Free. No account. Mac beta now, iPhone app coming.</p>
       </div>
     </div>
     <p class="photo-credit">An Italian account ledger, 1819. Photo: Donatello Trisolino</p>
+  </section>
+
+  <section class="twice" aria-labelledby="twice-h">
+    <div class="wrap">
+      <h2 id="twice-h" class="twice-title">Seen twice, counted once.</h2>
+      <div class="twice-grid">
+        <figure class="twice-photo print" data-reveal>
+          <img src="assets/photo/paper-pair-1400.webp" srcset="assets/photo/paper-pair-1400.webp 1400w, assets/photo/paper-pair-2400.webp 2400w" sizes="(min-width: 960px) 44vw, 100vw" width="2400" height="1600" alt="" loading="lazy">
+          <figcaption>Two sheets of paper on a black table. Photo: Karolina Grabowska, Kaboompics</figcaption>
+        </figure>
+        <div class="twice-body">
+          <p class="twice-lead">An agent's report is the original. A line from your bank's statement file, your iPhone or a receipt you attach is the copy. When the two line up, the purchase is verified, and it counts once.</p>
+          <figure class="act" data-act aria-labelledby="act-sum">
+            <div class="act-stage">
+              <div class="act-slip act-copy">
+                <p class="act-from">Your bank's statement file</p>
+                <p class="act-line"><span>ANTHROPIC*API</span><span>50.00</span></p>
+                <p class="act-meta">Oct 5</p>
+              </div>
+              <div class="act-slip act-orig">
+                <p class="act-from">Reported by Muse</p>
+                <p class="act-line"><span>Anthropic</span><span>$50.00</span></p>
+                <p class="act-meta">Oct 5, paid by card</p>
+                <p class="act-state"><span class="state ok act-after"><svg class="slip" viewBox="0 0 16 16" aria-hidden="true"><rect class="copy" x="4.5" y="4.5" width="10" height="10.5" rx="1.5"/><rect class="orig" x="1" y="1" width="10" height="10.5" rx="1.5"/></svg>Checked against your bank</span><span class="state flag act-before" aria-hidden="true"><svg class="slip" viewBox="0 0 16 16" aria-hidden="true"><rect class="orig" x="1" y="1" width="10" height="10.5" rx="1.5"/></svg>Reported, not verified yet</span></p>
+              </div>
+            </div>
+            <figcaption class="act-sum" id="act-sum">Counted once: <strong>$50.00</strong> under Agents.</figcaption>
+          </figure>
+          <p class="twice-note">A receipt or bank alert your agent found itself is kept as evidence, never as the copy: an agent can't vouch for itself.</p>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section class="rule-top" aria-labelledby="see-h">
@@ -64,7 +98,7 @@
         <h2 id="see-h">One number, and everything behind it</h2>
         <p>These are real screens from the app, filled with made-up purchases from two pretend agents, Muse and Scout.</p>
       </div>
-      <figure class="desk">
+      <figure class="desk" data-reveal>
         <img src="assets/photo/mac-desk-1400.webp" srcset="assets/photo/mac-desk-1400.webp 1400w, assets/photo/mac-desk-2400.webp 2400w" sizes="(max-width: 1180px) 100vw, 1120px" width="2400" height="1597" alt="Twinslip open on a MacBook on a wooden desk beside a pair of reading glasses: your agents have spent $441.87 so far in October, 59% checked against your bank or iPhone." loading="lazy">
         <figcaption>Twinslip's home screen, placed on a photographed MacBook. Photo: Daniil Komov.</figcaption>
       </figure>
@@ -189,7 +223,7 @@
   </section>
 
   <section class="rule-top" aria-labelledby="trust-h">
-    <figure class="pen">
+    <figure class="pen print" data-reveal>
       <img src="assets/photo/fountain-pen-1400.webp" srcset="assets/photo/fountain-pen-1400.webp 1400w, assets/photo/fountain-pen-2400.webp 2400w" sizes="100vw" width="2400" height="1600" alt="" loading="lazy">
       <figcaption>Photo: cottonbro studio</figcaption>
     </figure>

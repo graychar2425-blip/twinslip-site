@@ -177,6 +177,63 @@
     }
   }
 
+  // Seen twice, counted once: the website's one orchestrated moment (docs/DESIGN.md "Motion").
+  // The agent's report sits alone, flagged; the bank's line slides up and under it into register;
+  // the state mark turns to two slips; the count appears. The page's HTML and CSS are the end
+  // state: the animations only hold the earlier frames (fill: backwards) until they play, once.
+  const ease = 'cubic-bezier(0.16, 1, 0.3, 1)';
+  const act = document.querySelector('[data-act]');
+  if (act && act.animate && !still.matches) {
+    const copy = act.querySelector('.act-copy');
+    const orig = act.querySelector('.act-orig').getBoundingClientRect();
+    const at = copy.getBoundingClientRect();
+    // Before: the copy lies just below the original, apart from it and fully readable.
+    const apart = `translate(${orig.left - at.left}px, ${orig.bottom + 28 - at.top}px)`;
+    const after = act.querySelector('.act-after');
+    const steps = [
+      copy.animate([{ transform: apart }, { transform: 'none' }], { duration: 1300, delay: 450, easing: ease, fill: 'backwards' }),
+      act.querySelector('.act-before').animate([{ visibility: 'visible', opacity: 1 }, { visibility: 'visible', opacity: 0 }],
+        { duration: 180, delay: 1500, fill: 'backwards' }),
+      after.animate([{ clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0 0 0)' }],
+        { duration: 520, delay: 1600, easing: 'ease-out', fill: 'backwards' }),
+      after.querySelector('rect.copy').animate([{ transform: 'translate(3px, 3px)' }, { transform: 'none' }],
+        { duration: 420, delay: 1600, easing: ease, fill: 'backwards' }),
+      act.querySelector('.act-sum').animate([{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }],
+        { duration: 800, delay: 2050, easing: ease, fill: 'backwards' }),
+    ];
+    steps.forEach((a) => a.pause());
+    const play = () => steps.forEach((a) => a.play());
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        if (!entries.some((e) => e.isIntersecting)) return;
+        io.disconnect();
+        play();
+      }, { threshold: 0.55 });
+      io.observe(act);
+    } else play();
+  }
+
+  // Photographs unveil once as they come into view. Ones already on screen are left alone.
+  if (!still.matches && 'IntersectionObserver' in window && Element.prototype.animate) {
+    const unveil = (fig) => {
+      fig.classList.remove('veiled');
+      fig.animate([{ opacity: 0, clipPath: 'inset(10% 0 0 0)' }, { opacity: 1, clipPath: 'inset(0 0 0 0)' }], { duration: 1400, easing: ease });
+      fig.querySelector('img')?.animate([{ transform: 'scale(1.06)' }, { transform: 'none' }], { duration: 2000, easing: ease });
+    };
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        io.unobserve(e.target);
+        unveil(e.target);
+      }
+    }, { threshold: 0.15 });
+    document.querySelectorAll('[data-reveal]').forEach((fig) => {
+      if (fig.getBoundingClientRect().top < innerHeight * 0.9) return;
+      fig.classList.add('veiled');
+      io.observe(fig);
+    });
+  }
+
   // Copy buttons on code blocks.
   document.querySelectorAll('.code').forEach((block) => {
     const pre = block.querySelector('pre');
