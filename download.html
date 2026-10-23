@@ -56,6 +56,7 @@
           <p class="muted">The beta: a folder with the app and a file you double-click to start it.</p>
           <a class="btn" href="downloads/Twinslip-beta-0.1.0.zip" download>Download for Mac</a>
           <p class="meta">Twinslip-beta-0.1.0.zip, a small zip file. Needs macOS and a free program called Node, which the app helps you install.</p>
+          <p class="meta">It connects the agent apps it finds on your Mac. For Cowork, or to add Twinslip from inside Claude, see <a href="#other-ways">other ways to install</a>.</p>
         </div>
         <div class="dl">
           <h2>iPhone</h2>
@@ -73,7 +74,7 @@
     <div class="wrap">
       <div class="section-head">
         <h2 id="setup-h">Set it up on your Mac</h2>
-        <p>Have your agent app installed first. Claude Code is checked end to end; Claude Desktop, Cursor and Windsurf are set up the same way but not yet checked end to end.</p>
+        <p>Have your agent app installed first. Claude Code is checked end to end; the other apps are set up the same way but not yet checked end to end.</p>
       </div>
       <ol class="howto">
         <li>
@@ -100,7 +101,7 @@
         </li>
         <li>
           <h3>Hand it to your agent</h3>
-          <p>Twinslip connects itself to the agent apps it finds on your Mac (Claude Desktop, Claude Code, Cursor, Windsurf) and changes nothing else in them. Quit your agent app and open it again so it picks up the connection, then say: <span class="path">"Set up Twinslip."</span></p>
+          <p>Twinslip connects itself to the agent apps it finds on your Mac (Claude Desktop, Claude Code, Codex and the ChatGPT desktop app, VS Code, Cursor, Windsurf or Devin Desktop, Gemini CLI and Zed) and changes nothing else in them. Quit your agent app and open it again so it picks up the connection, then say: <span class="path">"Set up Twinslip."</span></p>
           <p>Your agent does the rest and tells you if anything is left for you to do. If your agent app can already read your email, it can sweep it for receipts from AI and developer-tool vendors and for bank alerts, right then; Twinslip never gets your email login, and nothing runs on a schedule.</p>
         </li>
         <li>
@@ -108,6 +109,23 @@
           <p>Your ledger opens in your web browser. The address starts with 127.0.0.1, which means your own computer, not a website. A checklist there ticks itself off as things start working, and from now on each purchase your agent reports shows up within a second.</p>
         </li>
       </ol>
+    </div>
+  </section>
+
+  <section class="rule-top" id="other-ways" aria-labelledby="other-h">
+    <div class="wrap narrow prose">
+      <h2 id="other-h">Other ways to install</h2>
+      <p>These add Twinslip's tools to Claude from inside it, so your agent can record what it spends. Your ledger page, where you sort purchases and add your bank's statement file, comes with the Mac download. If you've set that up, you don't need these: it already connects Claude Desktop and Claude Code. These ways are new and not yet checked end to end.</p>
+      <h3>Claude Desktop: double-click</h3>
+      <p><a class="btn ghost" href="downloads/twinslip-0.1.0.mcpb" download>Download for Claude Desktop</a></p>
+      <p>Double-click <span class="path">twinslip-0.1.0.mcpb</span> or drag it into the Claude window, then confirm the install. You can also choose <span class="path">Settings → Extensions → Advanced settings → Install Extension…</span> and pick the file. Claude Desktop brings its own copy of Node; we haven't checked yet that it's new enough for Twinslip.</p>
+      <h3>Claude Code: two commands</h3>
+      <p>Paste these into your terminal one at a time, or ask Claude Code to run them. You need Claude Code 2.1.224 or later and Node 22.13 or later.</p>
+      <div class="code"><pre class="wrap-lines">claude plugin marketplace add https://graychar2425-blip.github.io/twinslip-site/claude/marketplace.json</pre></div>
+      <div class="code"><pre>claude plugin install twinslip@twinslip</pre></div>
+      <p>Then start a new Claude Code session and say: <span class="path">"Set up Twinslip."</span></p>
+      <h3>Cowork: upload the plugin</h3>
+      <p>Download <a href="claude/twinslip-plugin-0.1.0.zip" download>twinslip-plugin-0.1.0.zip</a>. In Claude, choose <span class="path">Customize → Plugins → Add → Upload plugin</span> and pick the zip. Twinslip runs while Cowork works on your computer, and needs Node 22.13 or later.</p>
     </div>
   </section>
 

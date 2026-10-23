@@ -10,7 +10,9 @@ AI provider.
 ## Compatibility (as tested)
 
 - Claude Code: verified end to end.
-- Claude Desktop, Cursor, Windsurf: configured by `setup`; not verified end to end.
+- Claude Desktop, Codex and the ChatGPT desktop app (one shared settings file), Cursor,
+  VS Code, Gemini CLI, Zed, Windsurf and Devin Desktop: configured by `setup`; not verified
+  end to end.
 - Other agents: can report through the CLI (`twinslip record`) or the local capture
   webhook; untested.
 - Cloud-only agents with no process on the user's computer can't reach the local ledger.
@@ -83,11 +85,28 @@ node bin/twinslip.js setup --yes --json   # never asks anything; prints JSON
 node bin/twinslip.js doctor               # checks every link end to end
 ```
 
-`setup` registers the server with Claude Code (verified end to end) and with Claude Desktop,
-Cursor and Windsurf (configured, not verified end to end) if found,
-leaves other servers alone and backs up any config it changes. Each app gets its own agent,
-named after it ("Claude", "Cursor"); an app already connected with a name keeps it.
-`--dry-run` previews; `--host` limits it to one app; `--agent <name>` names the agent yourself.
+`setup` registers the server with Claude Code (verified end to end) and with each other app
+below that it finds (configured, not verified end to end). It leaves other servers and settings
+alone, backs up any config it changes and writes it atomically.
+
+| App | What `setup` writes |
+|---|---|
+| Claude Code | `claude mcp add --scope user twinslip -- …` |
+| Claude Desktop | `mcpServers.twinslip` in `claude_desktop_config.json` |
+| Codex CLI, Codex IDE extension, ChatGPT desktop app | `[mcp_servers.twinslip]` in `~/.codex/config.toml` (or `$CODEX_HOME`) |
+| Cursor | `mcpServers.twinslip` in `~/.cursor/mcp.json` |
+| VS Code | `servers.twinslip` (`"type": "stdio"`) in the user profile's `mcp.json` |
+| Gemini CLI | `mcpServers.twinslip` in `~/.gemini/settings.json` |
+| Zed | `context_servers.twinslip` in `~/.config/zed/settings.json` |
+| Devin Desktop | `mcpServers.twinslip` in `~/.config/devin/mcp_config.json` |
+| Windsurf (older installs) | `mcpServers.twinslip` in `~/.codeium/windsurf/mcp_config.json` |
+
+Comments in Zed's and VS Code's files stay. A file `setup` can't change without losing
+something (a comment inside the Twinslip entry, a TOML layout it won't edit) is left as it is,
+and `setup` prints the lines to add by hand (`snippet` in the `--json` output).
+Each app gets its own agent, named after it ("Claude", "Cursor"); an app already connected with
+a name keeps it. `--dry-run` previews; `--host` limits it to one app; `--agent <name>` names
+the agent yourself.
 
 **If you are an agent installing this for your user:**
 

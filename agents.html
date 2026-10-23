@@ -63,7 +63,7 @@
     <div class="wrap prose">
       <h2 id="what-h">What the MCP server is</h2>
       <p>The agent host launches <code>twinslip mcp --agent-key &lt;app&gt;</code> (each app gets its own agent, named after it; <code>--agent &lt;name&gt;</code> when the user named it) over stdio. It writes to the user's ledger on the same computer. Nothing goes to a server of ours, because there isn't one. (What the agent reads still passes through its own AI provider.)</p>
-      <p><strong>Compatibility, as tested:</strong> Claude Code is verified end to end. Setup also configures Claude Desktop, Cursor and Windsurf, which are not verified end to end yet. Other MCP clients, scripts and frameworks can use the config block, the CLI or the capture webhook below; those are untested. Cloud-only agents with no process on the user's computer can't reach the ledger.</p>
+      <p><strong>Compatibility, as tested:</strong> Claude Code is verified end to end. Setup also configures Claude Desktop, Codex and the ChatGPT desktop app (one shared settings file), Cursor, VS Code, Gemini CLI, Zed, Windsurf and Devin Desktop, which are not verified end to end yet. Other MCP clients, scripts and frameworks can use the config block, the CLI or the capture webhook below; those are untested. Cloud-only agents with no process on the user's computer can't reach the ledger.</p>
       <ul>
         <li>The agent's identity comes from that config line, which the user wrote, never from the model. An agent can only ever record spending as itself.</li>
         <li>Add and read only. There is no tool to confirm, delete, undo or change rules, so a prompt-injected agent can at worst add an entry the user then removes. It can't hide spending: a refund it reports waits for the user's tap before it lowers a total.</li>
@@ -93,7 +93,18 @@
       <p>If <code>twinslip</code> isn't on your PATH, run it through Node:</p>
       <div class="code"><pre>node bin/twinslip.js setup
 node bin/twinslip.js doctor</pre></div>
-      <p><code>setup</code> registers the server with the agent apps it knows and finds (Claude Code, verified end to end; Claude Desktop, Cursor and Windsurf, configured but not yet verified end to end), leaves their other servers alone, and backs up any config file it changes. Each app gets its own agent, named after it; <code>--agent &lt;name&gt;</code> names it yourself. <code>--dry-run</code> shows what it would do; <code>--host</code> limits it to one app. Restart the agent app afterwards. <code>doctor</code> checks every link end to end.</p>
+      <p><code>setup</code> registers the server with the agent apps it knows and finds (Claude Code, verified end to end; the others configured but not yet verified end to end), leaves their other servers and settings alone, and backs up any config file it changes:</p>
+      <ul>
+        <li>Claude Code: <code>claude mcp add --scope user twinslip -- …</code></li>
+        <li>Claude Desktop: <code>mcpServers.twinslip</code> in <code>claude_desktop_config.json</code></li>
+        <li>Codex CLI, Codex IDE extension and the ChatGPT desktop app: <code>[mcp_servers.twinslip]</code> in <code>~/.codex/config.toml</code> (or <code>$CODEX_HOME</code>)</li>
+        <li>Cursor: <code>mcpServers.twinslip</code> in <code>~/.cursor/mcp.json</code></li>
+        <li>VS Code: <code>servers.twinslip</code> (<code>"type": "stdio"</code>) in the user profile's <code>mcp.json</code></li>
+        <li>Gemini CLI: <code>mcpServers.twinslip</code> in <code>~/.gemini/settings.json</code></li>
+        <li>Zed: <code>context_servers.twinslip</code> in <code>~/.config/zed/settings.json</code></li>
+        <li>Devin Desktop: <code>mcpServers.twinslip</code> in <code>~/.config/devin/mcp_config.json</code>; older Windsurf installs: <code>~/.codeium/windsurf/mcp_config.json</code></li>
+      </ul>
+      <p>Comments in Zed's and VS Code's files stay. A file setup can't change without losing something is left as it is, and setup prints the lines to add by hand. Each app gets its own agent, named after it; <code>--agent &lt;name&gt;</code> names it yourself. <code>--dry-run</code> shows what it would do; <code>--host</code> limits it to one app. Restart the agent app afterwards. <code>doctor</code> checks every link end to end.</p>
       <h3>Any other MCP client (untested)</h3>
       <p>Add a stdio server like this, with absolute paths. <code>setup</code> prints the exact block for your machine.</p>
       <div class="code"><pre>{

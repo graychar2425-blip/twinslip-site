@@ -8,13 +8,18 @@
   "transport": "stdio",
   "install": {
     "command": "node bin/twinslip.js setup --yes --json",
-    "note": "Run from the Twinslip folder. Never asks anything; each agent app gets its own agent, named after it. Then restart the app and call get_setup. Verified end to end with Claude Code; Claude Desktop, Cursor and Windsurf are configured by setup but not verified end to end. Other agents can use the CLI or the local webhook (untested).",
+    "note": "Run from the Twinslip folder. Never asks anything; each agent app gets its own agent, named after it. Then restart the app and call get_setup. Verified end to end with Claude Code; Claude Desktop, Codex and the ChatGPT desktop app, Cursor, VS Code, Gemini CLI, Zed, Windsurf and Devin Desktop are configured by setup but not verified end to end. Other agents can use the CLI or the local webhook (untested).",
     "runtime": "node >=22.13",
     "supportedHosts": [
       "Claude Desktop",
       "Claude Code",
+      "ChatGPT or Codex",
       "Cursor",
-      "Windsurf"
+      "VS Code",
+      "Gemini CLI",
+      "Zed",
+      "Windsurf",
+      "Devin Desktop"
     ]
   },
   "launch": {
@@ -23,7 +28,7 @@
       "<path to Twinslip>/bin/twinslip.js",
       "mcp",
       "--agent-key",
-      "<claude-desktop | claude-code | cursor | windsurf>"
+      "<claude-desktop | claude-code | cursor | windsurf | devin | codex | vscode | gemini | zed>"
     ]
   },
   "protocolVersions": [

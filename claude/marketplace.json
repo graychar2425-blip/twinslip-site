@@ -1,0 +1,20 @@
+{
+  "name": "twinslip",
+  "owner": {
+    "name": "{{PUBLISHER_NAME}}",
+    "url": "https://graychar2425-blip.github.io/twinslip-site"
+  },
+  "description": "Twinslip: the record of what your AI agents spend, kept on your computer.",
+  "plugins": [
+    {
+      "name": "twinslip",
+      "source": {
+        "source": "archive",
+        "url": "https://graychar2425-blip.github.io/twinslip-site/claude/twinslip-plugin-0.1.0.zip",
+        "sha256": "b1cdd176a1468e621e4d81f6bb17fb03acd5ee4c43b4d463e27155b283f37a35"
+      },
+      "description": "What did your agents cost you last month? Claude records each purchase it makes, the moment it pays; your bank's CSV, your iPhone or a receipt you add checks it. Your ledger stays on your computer.",
+      "category": "productivity"
+    }
+  ]
+}
