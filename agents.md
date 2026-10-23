@@ -228,8 +228,9 @@ checklist); it adds or changes no purchases. Only call it after the search has a
 ### The free plan's one agent
 
 The free plan counts one agent's purchases: the first agent that reported, unless the user
-chooses another in Twinslip (Menu → Settings → Agents). Pro counts every agent's. When an agent
-the free plan doesn't cover calls `record_purchase` or `record_usage`, the purchase is saved in
+chooses another in Twinslip (Menu → Settings → Agents). Pro counts 3 agents' (more if the user
+adds agents), and an agent beyond those is handled the same way, with "because the Pro plan covers
+3 agents". When an agent the free plan doesn't cover calls `record_purchase` or `record_usage`, the purchase is saved in
 full and waits in the user's inbox, and the answer is one sentence: "Saved Exa, $10.00, for the
 user to review in Twinslip, because the free plan covers one agent." Nothing is refused or
 dropped; don't retry and don't ask the user to upgrade. `get_setup` says which agent the free
