@@ -1,0 +1,8 @@
+{
+  "version": "0.1.0",
+  "released": "2026-10-05",
+  "download": "https://graychar2425-blip.github.io/twinslip-site/downloads/Twinslip-beta-0.1.0.zip",
+  "sha256": "c25ddebc6ed421d4ddd0f7a6e90dc8e790816368ca5a499e36dd59a1adbc4866",
+  "notes": "Added\n- Agents report each purchase over MCP the moment they pay (Claude Desktop, Claude Code,\n  Cursor, Windsurf); agent-ledger setup connects them.\n- Email receipts and a bank feed (SimpleFIN or CSV) verify agent reports. A charge seen\n  more than once counts once and gets a ✓.\n- Home screen: the month's total, % verified, pace for the month, one line per agent.\n- Per-agent monthly budgets, with warnings at 80% and 100%, readable by agents\n  (get_budget).\n- An inbox that guesses which agent bought a charge, with a reason, and confirms the sure\n  ones in one tap. Keyboard shortcuts.\n- Search with running totals; \"Subscriptions agents started\".\n- Export to CSV, YNAB and Lunch Money.\n- First-run setup checklist, a \"What's stored\" page, and an install guide for\n  non-developers.\n- A beta download (scripts/package-beta.sh) with a double-click launcher.",
+  "minNode": "22.13"
+}

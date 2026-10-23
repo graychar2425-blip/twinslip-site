@@ -89,6 +89,7 @@
         <li>Nothing goes to your bank, and Twinslip never logs into one.</li>
         <li>Only if you run <code>twinslip import --from link-cli</code>: Twinslip runs your own link-cli, which asks Stripe for your Link records with your own sign-in. Twinslip sends nothing itself. lnget's log is read on your computer.</li>
         <li>If you buy Pro, the app contacts Lemon Squeezy, the checkout service, to switch your key on and to re-check it about once a month. It sends the key and a name for this computer. Never your purchases.</li>
+        <li>Once a day while the app is open, and when you press "Check now" in Settings, it downloads one small file from this website, <code>updates/latest.json</code>, and its signature, to see whether a new version is out. The request carries nothing about you or your ledger; like any website, our host sees your IP address. You download and install a new version yourself; the app never does it on its own. You can turn the check off in Settings.</li>
       </ul>
     </div>
   </section>
