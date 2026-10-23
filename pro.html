@@ -3,10 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; script-src 'self' https://app.lemonsqueezy.com https://assets.lemonsqueezy.com; style-src 'self' 'unsafe-inline'; frame-src https://*.lemonsqueezy.com; connect-src 'self' https://*.lemonsqueezy.com; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; script-src 'self' https://app.lemonsqueezy.com https://assets.lemonsqueezy.com; style-src 'self' 'unsafe-inline'; frame-src https://*.lemonsqueezy.com; connect-src 'self' https://*.lemonsqueezy.com https://formsubmit.co; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<!-- "Tell me when Pro opens": FormSubmit's AJAX address (https://formsubmit.co/ajax/...), written by
+     scripts/publish-site.sh from its optional third argument. Empty: the form shows a plain note instead. -->
+<meta name="twinslip:pro-list-url" content="">
 <title>Twinslip Pro</title>
-<meta name="description" content="Twinslip is free to use. Pro bills your clients for the AI costs of their work: a statement per client with how every line was checked, invoice lines, and costs marked billed. It also adds follow-up on what needs you, a tax pack, accounting exports, advanced search, unusual-spend alerts and per-agent history. Per seat, billed yearly. Your ledger lives on your computer. We never see it.">
+<meta name="description" content="Twinslip is free for one agent and one bank or card account. Pro covers every agent and account, and bills your clients for the AI costs of their work: a statement per client with how every line was checked, invoice lines, and costs marked billed. It also adds follow-up on what needs you, a tax pack, accounting exports, advanced search, unusual-spend alerts and per-agent history. $10 a month or $96 a year per person. Your ledger lives on your computer. We never see it.">
 <link rel="canonical" href="https://graychar2425-blip.github.io/twinslip-site/pro">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#121628">
@@ -26,6 +29,7 @@
 <script src="config.js" defer></script>
 <script src="main.js" defer></script>
 <script src="pro.js" defer></script>
+<script src="notify.js" defer></script>
 </head>
 <body class="page">
 <a class="skip" href="#main">Skip to content</a>
@@ -46,7 +50,7 @@
   <div class="page-head">
     <div class="wrap">
       <h1>Pro pays for itself the first time you bill a client.</h1>
-      <p class="lead">Seeing what a job cost is free. If your agents' costs are your clients' costs, Pro turns them into a statement you can send: every line with how it was checked, your handling fee as its own line, and the lines marked billed with your invoice number. It also keeps watch over your agents' spending and adds what an accountant or a tax form needs. The tracker stays free.</p>
+      <p class="lead">Free covers one agent and one bank or card account, with every purchase and all your history. Pro covers every agent and every account. If your agents' costs are your clients' costs, Pro also turns them into a statement you can send: every line with how it was checked, your handling fee as its own line, and the lines marked billed with your invoice number. It keeps watch over your agents' spending and adds what an accountant or a tax form needs.</p>
     </div>
   </div>
 
@@ -57,7 +61,7 @@
           <h2 id="buy-h" class="sr">Pro</h2>
           <p class="kicker">Pro opens</p>
           <p class="price-big">February 2027</p>
-          <p class="per">$96 a seat per year ($8 a month, billed yearly). Anyone who buys by 15 April 2027 pays $72 a year for as long as they stay subscribed. Everything in Free works today, with no account and no card.</p>
+          <p class="per">$10 a month or $96 a year per person. Founding price: anyone who buys by 15 April 2027 pays $72 a year for as long as they stay subscribed. Beta testers get a year free. No trial; a 30-day refund instead. Everything in Free works today, with no account and no card.</p>
         </div>
         <div class="buy-closed">
           <a class="btn" href="download.html">Get the free app</a>
@@ -68,7 +72,13 @@
           <h2 id="buy-h" class="sr">Buy Pro</h2>
           <p class="testmode" id="testmode" hidden>Test checkout: no real money moves</p>
           <p class="price-big"><span data-price>$96</span></p>
-          <p class="per">per seat, per year</p>
+          <p class="per" id="per">per person, per year</p>
+          <fieldset class="period">
+            <legend class="sr">How you pay</legend>
+            <label><input type="radio" name="period" value="year" data-price="$96" data-per="per person, per year" checked> Yearly, $96</label>
+            <label><input type="radio" name="period" value="month" data-price="$10" data-per="per person, per month"> Monthly, $10</label>
+          </fieldset>
+          <p class="muted small below">Buy by 15 April 2027 and the yearly price is $72, kept while you stay subscribed. No trial; a 30-day refund instead.</p>
           <p class="muted small below">A seat is one person, not an agent or a device, on up to two of their computers. With two seats or more you also get the audit trail.</p>
         </div>
         <div>
@@ -80,7 +90,7 @@
               <button type="button" id="seats-plus" aria-label="One seat more">+</button>
             </div>
           </div>
-          <p class="total" id="total" aria-live="polite">1 seat × $96 a year</p>
+          <p class="total" id="total" aria-live="polite">1 seat: $96 a year</p>
           <p class="small muted" id="audit-note" hidden>Includes the audit trail.</p>
           <button type="button" class="btn" id="buy">Buy Pro</button>
           <div class="checkout-msg" id="checkout-msg" role="status" tabindex="-1" hidden></div>
@@ -88,6 +98,23 @@
         </div>
         </template>
       </div>
+    </div>
+  </section>
+
+  <section class="rule-top" aria-labelledby="notify-h">
+    <div class="wrap narrow">
+      <div class="section-head"><h2 id="notify-h">Tell me when Pro opens</h2></div>
+      <p id="notify-none" class="muted">The sign-up isn't open on this copy of the page. Pro opens in February 2027, and this page will say so.</p>
+      <form id="notify" class="notify" novalidate hidden>
+        <div class="sr" aria-hidden="true"><label for="notify-hp">Leave this empty</label><input id="notify-hp" name="website" tabindex="-1" autocomplete="off"></div>
+        <label for="notify-email">Your email</label>
+        <div class="field">
+          <input id="notify-email" type="email" required autocomplete="email" maxlength="254" placeholder="you@example.com">
+          <button type="submit" class="btn" id="notify-btn">Tell me</button>
+        </div>
+        <p class="msg" id="notify-msg" role="status" aria-live="polite"></p>
+        <p class="small muted">We email you once, when Pro opens. Only your email is sent, to our inbox through FormSubmit, a form service, and only when you press the button.</p>
+      </form>
     </div>
   </section>
 
@@ -111,7 +138,9 @@
           <tbody>
             <tr class="group"><th scope="rowgroup" colspan="3">Tracking (free for good)</th></tr>
             <tr><th scope="row">Purchases from your agents, receipts and your bank's statement file</th><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td></tr>
-            <tr><th scope="row">As many agents as you like</th><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td></tr>
+            <tr><th scope="row">Agents whose purchases count</th><td>1</td><td>Every agent</td></tr>
+            <tr><th scope="row">Bank or card accounts that check what agents report</th><td>1</td><td>Every account</td></tr>
+            <tr><th scope="row">Purchases recorded, and nothing dropped at the limit: other agents' purchases are saved in your inbox</th><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td></tr>
             <tr><th scope="row">Mine and Agents kept apart, with the one-tap inbox</th><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td></tr>
             <tr><th scope="row">Monthly budgets per agent</th><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td></tr>
             <tr><th scope="row">Month view and basic reports</th><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td><td><span class="yes" aria-hidden="true">✓</span><span class="sr">Included</span></td></tr>
@@ -147,7 +176,7 @@
     <div class="wrap narrow">
       <div class="section-head"><h2 id="cancel-h">If you cancel</h2></div>
       <div class="prose">
-        <p>Cancelling Pro never takes your data or the basic tracker. The Pro tools switch off when the year you paid for runs out. Everything you recorded stays on your computer, and the free tracker and plain export keep working exactly as before.</p>
+        <p>Cancelling Pro never takes your data or the basic tracker. The Pro tools switch off when the time you paid for runs out. Everything you recorded stays on your computer and everything already counted stays counted. From then on, purchases from agents beyond the free one wait in your inbox again, saved in full, and the free tracker and plain export keep working.</p>
       </div>
       <div class="faq below-l">
         <details>
@@ -159,8 +188,12 @@
           <div class="a"><p>Once, to switch it on. After that every Pro tool works offline. The app checks your key again about once a month, and if it can't get through it keeps working for another 30 days.</p></div>
         </details>
         <details>
-          <summary>Why yearly?</summary>
-          <div class="a"><p>Taxes and bookkeeping run on a yearly cycle, and so does most of the upkeep Pro pays for.</p></div>
+          <summary>What does Free cover?</summary>
+          <div class="a"><p>One agent and one bank or card account, with every purchase, all your history and plain export. The agent is the first one that reports, unless you choose another in Settings. Purchases from other agents are never dropped: they're saved in your inbox, marked, and count for their agent once you have Pro. A second account's statement is kept and listed in full; with Pro it checks what your agents report too. The iPhone and receipts you attach aren't accounts.</p></div>
+        </details>
+        <details>
+          <summary>Monthly or yearly?</summary>
+          <div class="a"><p>Either: $10 a month or $96 a year per person. Anyone who buys by 15 April 2027 pays $72 a year for as long as they stay subscribed.</p></div>
         </details>
         <details>
           <summary>Can I use Pro on more than one computer?</summary>
@@ -177,7 +210,7 @@
       <a class="brand" href="./"><img src="favicon.svg" alt="" width="30" height="30">Twinslip</a>
       <p>Free expense tracking that keeps what your agents spent apart from what you spent. In beta.</p>
       <p>Questions or something broken? <a href="https://github.com/graychar2425-blip/agent-ledger-site/issues">Tell us on GitHub</a>.</p>
-      <p>This site has no trackers, no analytics and no cookies. When Pro opens, its checkout loads Lemon Squeezy only after you click Buy.</p>
+      <p>This site has no trackers, no analytics and no cookies. When Pro opens, its checkout loads Lemon Squeezy only after you click Buy. The "Tell me when Pro opens" form sends your email to FormSubmit only when you press its button.</p>
     </div>
     <nav aria-label="Product">
       <a href="download.html">Download</a>

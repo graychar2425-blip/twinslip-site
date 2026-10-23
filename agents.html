@@ -289,6 +289,11 @@ node bin/twinslip.js doctor</pre></div>
         </table></div>
       </article>
 
+      <article class="tool" aria-labelledby="tool-free">
+        <h3 id="tool-free">The free plan's one agent</h3>
+        <p>The free plan counts one agent's purchases: the first agent that reported, unless the user chooses another in Twinslip (Menu → Settings → Agents). Pro counts every agent's. When an agent the free plan doesn't cover calls <code>record_purchase</code> or <code>record_usage</code>, the purchase is saved in full and waits in the user's inbox, and the answer is one sentence: "Saved Exa, $10.00, for the user to review in Twinslip, because the free plan covers one agent." Nothing is refused or dropped; don't retry and don't ask the user to upgrade. <code>get_setup</code> says which agent the free plan covers (<code>plan.free_agent</code>, <code>plan.you_are_covered</code>); agents can't choose it.</p>
+      </article>
+
       <article class="tool" aria-labelledby="tool-gsu">
         <h3 id="tool-gsu">get_setup<span class="kind">read-only</span></h3>
         <p>The Twinslip setup checklist: each step, whether it is done, who does it (automatic, you the agent, or the person), and exactly what to do next. Use it when the user asks you to set up Twinslip. Read-only.</p>

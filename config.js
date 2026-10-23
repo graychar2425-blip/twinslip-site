@@ -14,6 +14,10 @@ window.TWINSLIP_SITE = {
   // (https://<store>.lemonsqueezy.com/checkout/buy/<THIS-PART>).
   LS_CHECKOUT_VARIANT_ANNUAL: '{{LS_CHECKOUT_VARIANT_ANNUAL}}',
 
+  // The checkout id of the monthly Pro variant ($10 a month), found the same way. While it's a
+  // placeholder, the page offers yearly only.
+  LS_CHECKOUT_VARIANT_MONTHLY: '{{LS_CHECKOUT_VARIANT_MONTHLY}}',
+
   // true while the store is in Lemon Squeezy test mode. The page then labels the checkout as a
   // test so nobody mistakes it for a real purchase. Set to false only when going live.
   LS_TEST_MODE: true,

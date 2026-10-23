@@ -11,7 +11,7 @@
       "source": {
         "source": "archive",
         "url": "https://graychar2425-blip.github.io/twinslip-site/claude/twinslip-plugin-0.1.0.zip",
-        "sha256": "0d0fd564d6bb791ebf92ca52357ba8e58d88c77bef3a12b9c2b4a5f75fe1fc24"
+        "sha256": "261c59f4a4ab134d1995231feff611ab7c3bfd502ee681d7a79192510c9f4d14"
       },
       "description": "What did your agents cost you last month? Claude records each purchase it makes, the moment it pays; your bank's CSV, your iPhone or a receipt you add checks it. Your ledger stays on your computer.",
       "category": "productivity"

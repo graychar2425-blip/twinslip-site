@@ -225,6 +225,16 @@ checklist); it adds or changes no purchases. Only call it after the search has a
 | `kind` | yes | `receipts` or `bank_alerts`. |
 | `found` | yes | How many you recorded in this sweep (0 is fine). |
 
+### The free plan's one agent
+
+The free plan counts one agent's purchases: the first agent that reported, unless the user
+chooses another in Twinslip (Menu → Settings → Agents). Pro counts every agent's. When an agent
+the free plan doesn't cover calls `record_purchase` or `record_usage`, the purchase is saved in
+full and waits in the user's inbox, and the answer is one sentence: "Saved Exa, $10.00, for the
+user to review in Twinslip, because the free plan covers one agent." Nothing is refused or
+dropped; don't retry and don't ask the user to upgrade. `get_setup` says which agent the free
+plan covers (`plan.free_agent`, `plan.you_are_covered`); agents can't choose it.
+
 ### get_setup (read-only)
 
 The Twinslip setup checklist: each step, whether it is done, who does it (automatic, you the

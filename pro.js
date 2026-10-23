@@ -8,6 +8,8 @@
   const placeholder = (v) => typeof v !== 'string' || v.trim() === '' || v.includes('{{');
   const subdomain = String(cfg.LS_STORE_SUBDOMAIN || '');
   const variant = String(cfg.LS_CHECKOUT_VARIANT_ANNUAL || '');
+  const monthlyVariant = String(cfg.LS_CHECKOUT_VARIANT_MONTHLY || '');
+  const monthlyOk = !placeholder(monthlyVariant) && /^[A-Za-z0-9-]{1,80}$/.test(monthlyVariant);
   const configured = !placeholder(subdomain) && !placeholder(variant)
     && /^[a-z0-9-]{1,63}$/i.test(subdomain) && /^[A-Za-z0-9-]{1,80}$/.test(variant);
   const maxSeats = Math.max(1, Math.min(500, Number(cfg.MAX_SEATS) || 25));
@@ -24,8 +26,13 @@
   const minus = $('#seats-minus');
   const plus = $('#seats-plus');
   const total = $('#total');
-  const priceText = ($('[data-price]')?.textContent || '').trim();
   input.max = String(maxSeats);
+  // Monthly or yearly: the price, the line under it, and which checkout opens.
+  const periods = [...document.querySelectorAll('input[name="period"]')];
+  if (!monthlyOk) for (const p of periods) if (p.value === 'month') p.closest('label').hidden = true;
+  const period = () => (periods.find((p) => p.checked)?.value === 'month' && monthlyOk ? 'month' : 'year');
+  const chosen = () => periods.find((p) => p.value === period());
+  const priceText = () => (chosen()?.dataset.price || $('[data-price]')?.textContent || '').trim();
 
   const seats = () => {
     const n = Math.round(Number(input.value));
@@ -36,15 +43,17 @@
   // placeholder, say it in words without inventing anything.
   function totalLine(n) {
     const seatWord = n === 1 ? '1 seat' : `${n} seats`;
-    const m = priceText.match(/^([^\d{]*)([\d.,]+)(.*)$/);
-    if (!priceText.includes('{{') && m) {
+    const text = priceText();
+    const every = period() === 'month' ? 'a month' : 'a year';
+    const m = text.match(/^([^\d{]*)([\d.,]+)(.*)$/);
+    if (!text.includes('{{') && m) {
       const per = Number(m[2].replace(/,/g, ''));
       if (Number.isFinite(per) && per > 0) {
         const sum = (per * n).toFixed(per % 1 === 0 ? 0 : 2);
-        return `${seatWord}: ${m[1]}${Number(sum).toLocaleString('en-US', { minimumFractionDigits: per % 1 === 0 ? 0 : 2 })}${m[3]} a year`;
+        return `${seatWord}: ${m[1]}${Number(sum).toLocaleString('en-US', { minimumFractionDigits: per % 1 === 0 ? 0 : 2 })}${m[3]} ${every}`;
       }
     }
-    return `${seatWord} × ${priceText} a year`;
+    return `${seatWord} × ${text} ${every}`;
   }
 
   function render() {
@@ -54,7 +63,10 @@
     plus.disabled = n >= maxSeats;
     total.textContent = totalLine(n);
     $('#audit-note').hidden = n < 2;
+    const c = chosen();
+    if (c) { $('[data-price]').textContent = c.dataset.price; $('#per').textContent = c.dataset.per; }
   }
+  for (const p of periods) p.addEventListener('change', render);
   minus.addEventListener('click', () => { input.value = String(seats() - 1); render(); });
   plus.addEventListener('click', () => { input.value = String(seats() + 1); render(); });
   input.addEventListener('change', render);
@@ -70,7 +82,7 @@
   const say = (html) => { msg.innerHTML = html; msg.hidden = false; msg.focus(); };
 
   function checkoutUrl(n, embed) {
-    const u = new URL(`https://${subdomain}.lemonsqueezy.com/checkout/buy/${variant}`);
+    const u = new URL(`https://${subdomain}.lemonsqueezy.com/checkout/buy/${period() === 'month' ? monthlyVariant : variant}`);
     u.searchParams.set('quantity', String(n));
     if (embed) u.searchParams.set('embed', '1');
     return u.toString();

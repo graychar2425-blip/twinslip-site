@@ -371,6 +371,16 @@ table.compare { width: 100%; border-collapse: collapse; font-size: 16px; min-wid
 .stepper input::-webkit-outer-spin-button, .stepper input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 .total { font-size: 16px; color: var(--paper-2); margin: 0 0 16px; min-height: 1.5em; }
 .checkout-msg { margin: 14px 0 0; padding: 12px 16px; border-radius: var(--radius-s); border: 1px solid var(--flag); color: var(--flag); font-size: 16px; }
+/* "Tell me when Pro opens" (pro.html) and the monthly or yearly choice */
+.notify { display: grid; gap: 10px; max-width: 560px; }
+.notify > label { font-weight: 650; }
+.notify .field { display: flex; gap: 10px; flex-wrap: wrap; }
+.notify input[type="email"] { flex: 1 1 240px; min-height: 44px; padding: 8px 12px; border: 1px solid var(--edge); border-radius: var(--radius-s); background: var(--sheet-2); color: var(--paper); font: inherit; }
+.notify input[type="email"]:focus-visible { outline: 2px solid var(--transfer); outline-offset: 2px; border-color: var(--transfer); }
+.notify .msg { margin: 0; min-height: 1.5em; color: var(--paper); }
+.notify .msg.err { color: var(--alarm); }
+.period { border: none; margin: 14px 0 0; padding: 0; display: flex; gap: 18px; flex-wrap: wrap; }
+.period label { display: inline-flex; gap: 8px; align-items: center; font-weight: 650; }
 .testmode { display: inline-block; font-size: 14px; font-weight: 650; color: var(--flag); border: 1px dashed currentColor; border-radius: 99px; padding: 1px 10px; margin-bottom: 10px; }
 .promise { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding-block: clamp(20px, 3vw, 30px); }
 .promise p { margin: 0; font-size: 21px; line-height: 1.5; color: var(--paper); max-width: 62ch; }
