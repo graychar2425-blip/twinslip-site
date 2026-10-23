@@ -4,10 +4,19 @@
 
 Key facts for agents:
 
-- After every payment you complete for the user, call `record_purchase` once, right away, with the order, invoice or transaction id as `reference`. Before a sizeable purchase, call `get_budget` with the amount, and `check_mandate` before buying from a new merchant. Report small pay-per-request payments with `record_usage`; name the `job` a purchase is for, and tell the user what a finished job cost with `get_job_cost`.
+- After every payment you complete for the user, call `record_purchase` once, right away, with the order, invoice or transaction id as `reference`. Before a sizeable purchase, call `get_budget` with the amount, and `check_mandate` before buying from a new merchant. Report small pay-per-request payments with `record_usage`; name the `job` a purchase is for (and the `client`, if the user bills the work to one), and tell the user what a finished job cost with `get_job_cost`.
+- After a payment over a payment rail, also pass `rail` and the `receipt` the rail gave you back (to `record_usage`, one payment per report, or to `record_purchase`). It is kept as evidence, never as verification, and anything that can spend is refused:
+  - x402: `rail: "x402"`, `receipt`: the `PAYMENT-RESPONSE` header or the `x402/payment-response` object from `_meta` (add `accepted` and `resource` so the amount and merchant can be read).
+  - mpp: `rail: "mpp"`, `receipt`: the `Payment-Receipt` header or `_meta["org.paymentauth/receipt"]`.
+  - l402: `rail: "l402"`, `receipt`: `{"invoice": "lnbc…", "preimage": "…"}`, never the macaroon.
+  - ap2: `rail: "ap2"`, `receipt`: the payment receipt JWT and the closed payment mandate; before buying, pass an AP2 mandate you hold to `check_mandate` as `ap2_mandate`.
+  - acp: `rail: "acp"`, `receipt`: the completed checkout session, or the order.
+  - card: `rail: "card"`, `receipt`: the payment's receipt, without card numbers or security codes.
+  - other: `rail: "other"`, `receipt`: any other receipt; it is fingerprinted, not read.
+- When the user asks you to bill a client, call `get_unbilled` (read-only) and help draft the invoice from it. Never mark anything billed or say it is: only the user does that, in Twinslip. Without Pro it gives each client's total not billed yet and its jobs' costs.
 - If you return something or a merchant promises money back, call `record_expected_refund` (merchant, amount, due_on). It changes no total, and only the user's bank or the user resolves it.
 - The server is add-and-read only. Agents can't confirm, delete or hide anything: what they add either counts as their own spending or waits for the user's tap. A refund, or a charge the user hasn't put under Agents, waits for that tap.
-- ✓ verified means a line from the user's bank CSV, their iPhone, the local webhook or a receipt they attached saw the charge too. A receipt or bank alert you find never verifies anything on its own.
+- ✓ verified means a line from the user's bank CSV (or their Stripe Link record, if they import it), their iPhone, the local webhook or a receipt they attached saw the charge too. A receipt or bank alert you find, or a receipt a payment rail gave you, never verifies anything on its own.
 - Limits: at most 100,000.00 per purchase, 300 rows per agent per hour, dates within the last 400 days and no later than tomorrow (time zones), no unknown fields. Each refusal says why.
 - Never put card numbers, account numbers, API keys or passwords in any field.
 - To set it up for the user: call `get_setup` (or use the `setup` prompt). It lists every step, who does it, and the exact instructions; do the steps marked for you and tell the user what's left. Prove the connection with `test_capture` (a check, never a purchase); never pay for anything to test. When you finish an email sweep, call `finish_sweep`, even if you found nothing.
@@ -15,7 +24,7 @@ Key facts for agents:
 - If you are installing it for the user: from the Twinslip folder run `node bin/twinslip.js setup --yes --json`. It never asks anything, connects the agent apps it finds (each gets its own agent, named after the app) and prints which apps to restart. After the restart, call `get_setup`. It is a stdio server; there is no remote endpoint.
 - Compatibility, as tested: Claude Code is verified end to end. Claude Desktop, Codex and the ChatGPT desktop app (one shared ~/.codex/config.toml), Cursor, VS Code, Gemini CLI, Zed, Windsurf and Devin Desktop are configured by setup but not verified end to end. Other agents can report through the CLI (`twinslip record`) or the local webhook (untested).
 - Email sweeps run only when the user asks, using email access the user already gave the agent app; Twinslip never gets the mailbox login and schedules nothing. Receipt sweeps cover known agent vendors only; bank-alert sweeps cover any merchant.
-- Pricing: the tracker is free, including several agents, all history, plain CSV export and source status. Pro is $96 per seat per year (one seat per person; billed yearly; opens February 2027) and adds ongoing oversight (follow-up on missing refunds, coverage gaps and failing sources, scheduled checks, a briefing), a tax pack, accounting exports (YNAB, Lunch Money), advanced search, unusual-spend alerts and per-agent history.
+- Pricing: the tracker is free, including several agents, all history, plain CSV export and source status. Pro is $96 per seat per year (one seat per person; billed yearly; opens February 2027; $72 for anyone who buys by 15 April 2027). It leads with billing clients for AI costs (a statement per client with how every line was checked, invoice lines, and costs marked billed with the user's invoice number; seeing what a job cost stays free) and adds ongoing oversight (follow-up on missing refunds, coverage gaps and failing sources, scheduled checks, a briefing), a tax pack, accounting exports (YNAB, Lunch Money), advanced search, unusual-spend alerts and per-agent history.
 
 ## Docs
 

@@ -59,12 +59,14 @@
         <li>What each agent may buy, if you write it (merchants, the most for one purchase, payment methods, an end date, a note), and which purchases fell outside it.</li>
         <li>The name an agent gives the job a purchase paid for, scrubbed of anything that looks like a card number or key; and for many tiny payments, the exact total and payment count per merchant per day.</li>
         <li>A usage log of counts (no merchants, amounts or names) for the beta report. It leaves your computer only if you copy it yourself.</li>
+        <li>Receipts your agent passes on from a payment rail (x402, MPP, L402, AP2, ACP): which rail, the reference the receipt names the payment by (a transaction or payment hash, an order id), and a fingerprint of the receipt. Never the receipt itself; one that carries card details, a key or a payment token is refused.</li>
+        <li>If you import from Stripe Link or lnget: the date, amount, merchant and id of each charge (for lnget, one line per site per day, in sats). Nothing from a Link spend request is kept, including the one-time card it carries.</li>
         <li>If you buy Pro: your Pro key and when it was last checked, in a file only your user account can open.</li>
       </ul>
 
       <h2 class="below-l">What it never keeps</h2>
       <ul>
-        <li>Card numbers, bank logins, passwords, or anyone's API keys. Text from agents is scrubbed of anything that looks like a card number, key or token before it's saved, and so are order references and bank descriptions.</li>
+        <li>Card numbers, bank logins, passwords, payment tokens, or anyone's API keys. Text from agents is scrubbed of anything that looks like a card number, key or token before it's saved, and so are order references and bank descriptions.</li>
         <li>What your agents do, say or read. Only what they pay.</li>
       </ul>
 
@@ -72,7 +74,7 @@
       <ul>
         <li>Add purchases and receipts, and read totals and its own budget.</li>
         <li>It can't confirm, delete, hide, undo or change rules. What it adds either counts as its own spending or waits for your tap. A refund it reports, or a charge it claims that you haven't put under Agents, waits for your tap too.</li>
-        <li>Receipts it finds in your email are kept as evidence. Only a line from your bank's file, your iPhone, the local webhook or a receipt you attach marks a purchase ✓.</li>
+        <li>Receipts it finds in your email, and receipts its payment rails give it, are kept as evidence. Only a line from your bank's file (or Stripe Link's record, if you import it), your iPhone, the local webhook or a receipt you attach marks a purchase ✓.</li>
         <li>A misbehaving agent can at worst add an entry you then remove.</li>
       </ul>
 
@@ -85,6 +87,7 @@
         <li>Your agent's AI provider sees what your agent reads and is told: email it sweeps, and the totals and budget it asks Twinslip for. An agent running on your computer keeps that local; a cloud model doesn't.</li>
         <li>If you use the iPhone app: the phone writes new purchases to a file in your own iCloud Drive, and your Mac writes a small summary of this month's totals back for the phone. Apple's iCloud terms apply.</li>
         <li>Nothing goes to your bank, and Twinslip never logs into one.</li>
+        <li>Only if you run <code>twinslip import --from link-cli</code>: Twinslip runs your own link-cli, which asks Stripe for your Link records with your own sign-in. Twinslip sends nothing itself. lnget's log is read on your computer.</li>
         <li>If you buy Pro, the app contacts Lemon Squeezy, the checkout service, to switch your key on and to re-check it about once a month. It sends the key and a name for this computer. Never your purchases.</li>
       </ul>
     </div>

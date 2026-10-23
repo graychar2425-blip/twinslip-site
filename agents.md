@@ -26,7 +26,8 @@ Twinslip is connected. It is my record of what you spend.
 - After every payment you complete, call record_purchase once, right away. Give the merchant, the amount actually charged, the currency, the payment_method, and the order, invoice or transaction id as reference.
 - Before a sizeable purchase, call get_budget with the amount. If it would take you over budget, ask me first unless I already asked for that purchase.
 - Before buying from a merchant you haven't used for me, call check_mandate. If it's outside, ask me first.
-- Report small pay-per-request payments with record_usage. Name the job each purchase is for (job), and when you finish a job, tell me what it cost with get_job_cost.
+- Report small pay-per-request payments with record_usage. Name the job each purchase is for (job), and the client if I bill the work to one (client). When you finish a job, tell me what it cost with get_job_cost.
+- When I ask you to bill a client, call get_unbilled and help me draft the invoice from it. Never tell me something is billed: I mark that in Twinslip.
 - Don't record quotes, carts, failed or cancelled payments, or anything you aren't sure went through. Record a refund as a negative amount.
 - Never put card numbers, account numbers, API keys or passwords in any field.
 - When I ask what you've spent, answer with get_spend.
@@ -159,7 +160,9 @@ the amount actually charged, in the currency charged. Do NOT call for quotes, ca
 cancelled payments, or if you aren't sure the payment went through. Pass the order / invoice /
 transaction id as `reference` so a retry never double counts. Use a negative amount for a refund
 you received; refunds wait for the user to confirm before they lower your total. If the charge
-is one the user hasn't put under any agent, it waits for their one-tap confirmation too.
+is one the user hasn't put under any agent, it waits for their one-tap confirmation too. If it
+went over a payment rail (x402, MPP, L402, AP2, ACP), also pass `rail` and the `receipt` the rail
+gave you back (see "Receipts by rail" below).
 
 | Field | Required | Description |
 |---|---|---|
@@ -171,6 +174,9 @@ is one the user hasn't put under any agent, it waits for their one-tap confirmat
 | `reference` | no | Order, invoice or transaction id. Makes the call safe to retry. Max 120. |
 | `note` | no | What it was for, in a few words. Never include card numbers, keys or passwords. Max 200. |
 | `job` | no | The piece of work this paid for, named the same way every time, e.g. "Q3 market report". |
+| `client` | no | Who the user bills this work to, if they bill it to a client, e.g. "Acme Corp". Once a job has a client, its later purchases go to that client; a client the user set for a job always wins. Max 80. |
+| `rail` | no | The payment rail: `x402`, `mpp`, `l402`, `ap2`, `acp`, `card`, `other`. Pass it with the receipt. |
+| `receipt` | no | What the rail gave you back, as you got it: an object, or the header or JWT text. Kept as evidence, never verification. |
 
 ### record_receipt (writes, idempotent)
 
@@ -279,6 +285,7 @@ already asked for it. Anything you buy outside it is still recorded in full and 
 | `amount` | no | The amount, e.g. "20.00". |
 | `currency` | no | ISO code, default USD. |
 | `payment_method` | no | One of the `record_purchase` methods. |
+| `ap2_mandate` | no | An AP2 mandate you hold (object, JWT or SD-JWT). Its merchants, per-purchase limit and end date are named after the answer, which they never change. Nothing is stored. |
 
 ### record_usage (writes)
 
@@ -286,7 +293,8 @@ Small pay-per-request payments (x402 / HTTP 402, metered API calls, agent-to-age
 too small or too many to report one by one. The amount can have up to six decimals; `payments` says
 how many payments the report covers. The ledger keeps the exact running total per merchant per day
 and shows it as one line once it reaches a cent. At most 10.00 per report (use `record_purchase`
-above that) and 3,600 reports an hour.
+above that) and 3,600 reports an hour. With a receipt, report that one payment on its own and pass
+`rail` and `receipt`.
 
 | Field | Required | Description |
 |---|---|---|
@@ -297,6 +305,24 @@ above that) and 3,600 reports an hour.
 | `payment_method` | no | How it was paid; `crypto` for stablecoin rails. |
 | `occurred_on` | no | YYYY-MM-DD, default today. |
 | `job` | no | The piece of work this paid for. |
+| `client` | no | Who the user bills this work to, if anyone. |
+| `rail` | no | The payment rail, as for `record_purchase`. |
+| `receipt` | no | The receipt for this one payment (`payments` 1), as for `record_purchase`. |
+
+### Receipts by rail (`rail` and `receipt`)
+
+Pass what the rail gave you back, as you got it. Twinslip reads what it can (amount, date,
+reference), fills in fields you left out, and tells you where the receipt disagrees with what you
+sent. The receipt is kept as evidence, never as verification: only its reference and a
+fingerprint are stored. Anything that can spend or sign in is refused, and nothing is recorded.
+
+- `x402`: after an x402 payment, call `record_usage` (or `record_purchase` above 10.00) with `rail: "x402"` and, as `receipt`, the `PAYMENT-RESPONSE` header or the `x402/payment-response` object from the tool result's `_meta`; add the requirements you paid as `accepted`, and the `resource`, so the amount and merchant can be read. Never the `PAYMENT-SIGNATURE` you sent.
+- `mpp`: `rail: "mpp"` and the `Payment-Receipt` header, or `_meta["org.paymentauth/receipt"]`.
+- `l402`: `rail: "l402"` and `{"invoice": "lnbc…", "preimage": "…"}`. Never the macaroon.
+- `ap2`: `rail: "ap2"` and the payment receipt JWT with the closed payment mandate (an object holding both is fine). Before buying, pass an AP2 mandate you hold to `check_mandate` as `ap2_mandate`.
+- `acp`: `rail: "acp"` and what `complete_checkout_session` returned, or the order.
+- `card`: `rail: "card"` and the payment's receipt, without the card number or security code.
+- `other`: `rail: "other"` and any other receipt; it is fingerprinted, not read.
 
 ### get_job_cost (read-only)
 
@@ -307,6 +333,20 @@ empty to list recent jobs.
 | Field | Required | Description |
 |---|---|---|
 | `job` | no | The job name the purchases were reported under. |
+
+### get_unbilled (read-only)
+
+What the user hasn't billed their clients for yet: the agent costs on each client's jobs, with how
+each line was checked (the bank, the iPhone, a receipt attached, or the agent's report only), the
+subtotal, the user's handling fee and the total. When the user asks you to bill a client or draft
+an invoice, call it, then help draft the invoice from it. Never mark anything billed or say it is:
+only the user does that, in Twinslip. Without Pro it answers with each client's total not billed
+yet and its jobs' costs, and says that line-by-line statements and billing are part of Pro.
+
+| Field | Required | Description |
+|---|---|---|
+| `client` | no | The client, as the jobs name it. Leave empty for every client. |
+| `period` | no | `all` (default: everything not billed yet), `this_month`, `last_month`, or YYYY-MM. |
 
 ### Prompt: receipt_sweep
 

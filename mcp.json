@@ -100,6 +100,12 @@
       "idempotent": true
     },
     {
+      "name": "get_unbilled",
+      "title": "What a client has not been billed for yet",
+      "readOnly": true,
+      "idempotent": true
+    },
+    {
       "name": "get_setup",
       "title": "What is left to set up",
       "readOnly": true,

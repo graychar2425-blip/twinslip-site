@@ -130,7 +130,8 @@ node bin/twinslip.js doctor</pre></div>
 - After every payment you complete, call record_purchase once, right away. Give the merchant, the amount actually charged, the currency, the payment_method, and the order, invoice or transaction id as reference.
 - Before a sizeable purchase, call get_budget with the amount. If it would take you over budget, ask me first unless I already asked for that purchase.
 - Before buying from a merchant you haven't used for me, call check_mandate. If it's outside, ask me first.
-- Report small pay-per-request payments with record_usage. Name the job each purchase is for (job), and when you finish a job, tell me what it cost with get_job_cost.
+- Report small pay-per-request payments with record_usage. Name the job each purchase is for (job), and the client if I bill the work to one (client). When you finish a job, tell me what it cost with get_job_cost.
+- When I ask you to bill a client, call get_unbilled and help me draft the invoice from it. Never tell me something is billed: I mark that in Twinslip.
 - Don't record quotes, carts, failed or cancelled payments, or anything you aren't sure went through. Record a refund as a negative amount.
 - Never put card numbers, account numbers, API keys or passwords in any field.
 - When I ask what you've spent, answer with get_spend.</pre></div>
@@ -169,6 +170,7 @@ node bin/twinslip.js doctor</pre></div>
             <tr><td>reference</td><td>no</td><td>Order, invoice or transaction id. Makes the call safe to retry. Max 120 characters.</td></tr>
             <tr><td>note</td><td>no</td><td>What it was for, in a few words. Never include card numbers, keys or passwords. Max 200 characters.</td></tr>
             <tr><td>job</td><td>no</td><td>The piece of work this paid for, named the same way every time, e.g. "Q3 market report".</td></tr>
+            <tr><td>client</td><td>no</td><td>Who the user bills this work to, if they bill it to a client, e.g. "Acme Corp". Once a job has a client, its later purchases go to that client; a client the user set for a job always wins.</td></tr>
           </tbody>
         </table></div>
       </article>
@@ -261,6 +263,7 @@ node bin/twinslip.js doctor</pre></div>
             <tr><td>payment_method</td><td>no</td><td>How it was paid; crypto for stablecoin rails.</td></tr>
             <tr><td>occurred_on</td><td>no</td><td>YYYY-MM-DD, default today.</td></tr>
             <tr><td>job</td><td>no</td><td>The piece of work this paid for.</td></tr>
+            <tr><td>client</td><td>no</td><td>Who the user bills this work to, if anyone.</td></tr>
           </tbody>
         </table></div>
       </article>
@@ -271,6 +274,18 @@ node bin/twinslip.js doctor</pre></div>
         <div class="params-wrap"><table class="params">
           <thead><tr><th scope="col">Field</th><th scope="col">Required</th><th scope="col">Description</th></tr></thead>
           <tbody><tr><td>job</td><td>no</td><td>The job name the purchases were reported under.</td></tr></tbody>
+        </table></div>
+      </article>
+
+      <article class="tool" aria-labelledby="tool-gub">
+        <h3 id="tool-gub">get_unbilled<span class="kind">read-only</span></h3>
+        <p>What the user hasn't billed their clients for yet: the agent costs on each client's jobs, with how each line was checked (the bank, the iPhone, a receipt attached, or the agent's report only), the subtotal, the user's handling fee and the total. When the user asks you to bill a client or draft an invoice, call it, then help draft the invoice from it. Never mark anything billed or say it is: only the user does that, in Twinslip. Without Pro it answers with each client's total not billed yet and its jobs' costs, and says that line-by-line statements and billing are part of Pro.</p>
+        <div class="params-wrap"><table class="params">
+          <thead><tr><th scope="col">Field</th><th scope="col">Required</th><th scope="col">Description</th></tr></thead>
+          <tbody>
+            <tr><td>client</td><td>no</td><td>The client, as the jobs name it. Leave empty for every client.</td></tr>
+            <tr><td>period</td><td>no</td><td>all (default: everything not billed yet), this_month, last_month, or YYYY-MM.</td></tr>
+          </tbody>
         </table></div>
       </article>
 
